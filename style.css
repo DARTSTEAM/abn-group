@@ -484,6 +484,279 @@ body::after {
 }
 
 /* ============================================
+   STORY / WHY ABN
+   ============================================ */
+.story {
+  background: var(--dark);
+  padding: var(--section-pad) 0;
+}
+
+.story-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: clamp(40px, 7vw, 110px);
+  align-items: start;
+  margin-bottom: clamp(72px, 11vh, 130px);
+}
+
+.story-heading {
+  font-size: clamp(1.7rem, 3.4vw, 3rem);
+  font-weight: 200;
+  letter-spacing: -0.022em;
+  line-height: 1.18;
+  position: sticky;
+  top: 120px;
+}
+
+.story-heading em {
+  font-style: normal;
+  color: var(--accent-light);
+}
+
+.story-body {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.story-text {
+  font-size: clamp(0.95rem, 1.15vw, 1.08rem);
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--ash-mid);
+}
+
+.story-text em {
+  font-style: normal;
+  color: var(--accent-light);
+}
+
+/* Pillars */
+.story-pillars {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(28px, 4vw, 56px);
+  margin-bottom: clamp(64px, 9vh, 110px);
+}
+
+.story-pillar {
+  border-top: 1px solid var(--ash-faint);
+  padding-top: 28px;
+}
+
+.story-pillar-num {
+  font-size: 0.7rem;
+  font-weight: 400;
+  color: var(--accent-light);
+  letter-spacing: 0.1em;
+  font-variant-numeric: tabular-nums;
+}
+
+.story-pillar-title {
+  font-size: clamp(1.05rem, 1.5vw, 1.3rem);
+  font-weight: 300;
+  letter-spacing: -0.01em;
+  line-height: 1.32;
+  margin: 18px 0 14px;
+}
+
+.story-pillar-desc {
+  font-size: 0.85rem;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--ash-dim);
+}
+
+/* Closing */
+.story-close {
+  max-width: 860px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.story-text--lead {
+  font-size: clamp(1.15rem, 1.9vw, 1.6rem);
+  font-weight: 300;
+  color: var(--ash);
+  line-height: 1.5;
+  letter-spacing: -0.012em;
+}
+
+/* ============================================
+   TIMELINE / GROWTH
+   ============================================ */
+.timeline {
+  background: var(--dark-warm);
+  padding: var(--section-pad) 0;
+}
+
+.timeline-heading {
+  font-size: clamp(1.7rem, 3.4vw, 3rem);
+  font-weight: 200;
+  letter-spacing: -0.022em;
+  line-height: 1.18;
+  margin-bottom: clamp(56px, 8vh, 96px);
+}
+
+.timeline-heading em {
+  font-style: normal;
+  color: var(--accent-light);
+}
+
+.tl-track {
+  position: relative;
+  max-width: 720px;
+  margin: 0 auto 0 clamp(0px, 4vw, 60px);
+}
+
+/* vertical rail */
+.tl-track::before {
+  content: '';
+  position: absolute;
+  top: 8px;
+  bottom: 8px;
+  left: 71px;
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    var(--accent-deep) 0%,
+    var(--ash-faint) 100%
+  );
+}
+
+.tl-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 56px 30px 1fr;
+  align-items: start;
+  gap: 0;
+  padding-bottom: clamp(36px, 5vh, 56px);
+}
+
+.tl-item:last-child {
+  padding-bottom: 0;
+}
+
+.tl-year {
+  font-size: 1.05rem;
+  font-weight: 400;
+  color: var(--ash-dim);
+  letter-spacing: 0.02em;
+  font-variant-numeric: tabular-nums;
+  padding-top: 22px;
+  text-align: right;
+}
+
+.tl-item--now .tl-year {
+  color: var(--accent-light);
+}
+
+/* node on the rail */
+.tl-node {
+  position: relative;
+  width: 30px;
+  height: 100%;
+}
+
+.tl-node::before {
+  content: '';
+  position: absolute;
+  top: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--dark-warm);
+  border: 1px solid var(--accent-light);
+  box-shadow: 0 0 0 4px var(--dark-warm);
+  z-index: 2;
+}
+
+.tl-item--now .tl-node::before {
+  background: var(--accent-light);
+  box-shadow: 0 0 0 4px var(--dark-warm), 0 0 18px var(--accent-light);
+}
+
+/* card */
+.tl-card {
+  background: var(--surface);
+  border: 1px solid var(--ash-faint);
+  border-radius: 18px;
+  padding: 26px 30px;
+  margin-left: 14px;
+  transition: transform 0.4s var(--ease-out), border-color 0.4s ease, background 0.4s ease;
+}
+
+.tl-card:hover {
+  transform: translateX(6px);
+  border-color: rgba(196, 53, 78, 0.4);
+  background: var(--surface-light);
+}
+
+.tl-item--now .tl-card {
+  border-color: rgba(196, 53, 78, 0.35);
+  background: linear-gradient(135deg, var(--surface-light), var(--surface));
+}
+
+.tl-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.tl-logo {
+  height: 26px;
+  width: auto;
+  max-width: 150px;
+  object-fit: contain;
+}
+
+.tl-logo--icon {
+  height: 30px;
+}
+
+.tl-logo--group {
+  height: 24px;
+}
+
+.tl-tag {
+  font-size: 0.58rem;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ash-dim);
+  border: 1px solid var(--ash-faint);
+  border-radius: 100px;
+  padding: 5px 12px;
+  white-space: nowrap;
+}
+
+.tl-tag--now {
+  color: var(--accent-light);
+  border-color: rgba(196, 53, 78, 0.4);
+}
+
+.tl-title {
+  font-size: clamp(1.15rem, 1.8vw, 1.5rem);
+  font-weight: 300;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  margin-bottom: 10px;
+}
+
+.tl-desc {
+  font-size: 0.85rem;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--ash-dim);
+  max-width: 480px;
+}
+
+/* ============================================
    CONTACT
    ============================================ */
 .contact {
@@ -620,6 +893,58 @@ body::after {
 
   .hero-bottom-center {
     display: none;
+  }
+
+  /* Story */
+  .story-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    margin-bottom: 64px;
+  }
+
+  .story-heading {
+    position: static;
+  }
+
+  .story-pillars {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  /* Timeline */
+  .tl-track {
+    margin-left: 0;
+  }
+
+  .tl-track::before {
+    left: 5px;
+  }
+
+  .tl-item {
+    grid-template-columns: 30px 1fr;
+    gap: 0;
+  }
+
+  .tl-year {
+    grid-column: 2;
+    grid-row: 1;
+    text-align: left;
+    padding-top: 0;
+    padding-left: 14px;
+    margin-bottom: 10px;
+    color: var(--accent-light);
+  }
+
+  .tl-node {
+    grid-row: 1 / span 2;
+  }
+
+  .tl-node::before {
+    top: 4px;
+  }
+
+  .tl-card {
+    grid-column: 2;
   }
 }
 
