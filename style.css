@@ -709,19 +709,18 @@ body::after {
 }
 
 .tl-logo {
-  height: 26px;
+  height: 80px;
   width: auto;
-  max-width: 150px;
+  max-width: 260px;
   object-fit: contain;
 }
 
-.tl-logo--icon {
-  height: 30px;
-}
-
-.tl-logo--group {
-  height: 24px;
-}
+/* ponytail: negative margins compensate SVG internal whitespace */
+.tl-logo--abn-digital { margin-left: -16px; }
+.tl-logo--detrics     { margin-left: -15px; }
+.tl-logo--hike        { margin-left: -23px; }
+.tl-logo--abn-studio  { margin-left: -16px; }
+.tl-logo--abn-group   { margin-left: -16px; }
 
 .tl-tag {
   font-size: 0.58rem;
