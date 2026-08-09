@@ -19,12 +19,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
 
     if (gl) {
+      // Cap DPR low — the aurora is a soft, blurry gradient, so extra pixels
+      // are pure fill-rate cost (the main source of scroll jank on desktop).
       function resize() {
-        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        const dpr = Math.min(window.devicePixelRatio || 1, 1.25);
         const w = canvas.clientWidth, h = canvas.clientHeight;
         if (!w || !h) return;
-        canvas.width = w * dpr;
-        canvas.height = h * dpr;
+        canvas.width = Math.round(w * dpr);
+        canvas.height = Math.round(h * dpr);
         gl.viewport(0, 0, canvas.width, canvas.height);
       }
 
@@ -49,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         float fbm(vec2 p){
           float f = 0.0, amp = 0.5, freq = 1.0;
-          for(int i=0;i<6;i++){ f += amp*noise(p*freq); freq*=2.0; amp*=0.5; }
+          for(int i=0;i<4;i++){ f += amp*noise(p*freq); freq*=2.0; amp*=0.5; }
           return f;
         }
 
@@ -166,29 +168,46 @@ document.addEventListener('DOMContentLoaded', () => {
           }
 
           canvas.classList.add('ready');
+          // WebGL is live → drop the blur(70px) CSS fallback out of the render tree
+          if (section) section.classList.add('aurora-live');
 
           if (prefersReduced) {
             // single static frame — no animation loop
             draw(24.0);
           } else {
-            // animate only while the section is on screen (perf)
+            // Animate only while the section is on screen AND the tab is visible.
+            // Throttle to ~30fps: the aurora drifts slowly, so 30fps looks identical
+            // to 60 while halving GPU load — keeps scroll at a smooth 60fps.
             const start = performance.now();
-            let running = false, rafId = null;
-            const loop = () => {
-              draw((performance.now() - start) / 1000);
+            const FRAME = 1000 / 30;
+            let running = false, rafId = null, lastDraw = 0;
+            const loop = (now) => {
+              rafId = requestAnimationFrame(loop);
+              if (now - lastDraw < FRAME) return;
+              lastDraw = now;
+              draw((now - start) / 1000);
+            };
+            const startLoop = () => {
+              if (running || document.hidden) return;
+              running = true; lastDraw = 0;
               rafId = requestAnimationFrame(loop);
             };
+            const stopLoop = () => {
+              running = false;
+              if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+            };
+            let onScreen = false;
             const io = new IntersectionObserver((entries) => {
               entries.forEach((en) => {
-                if (en.isIntersecting && !running) {
-                  running = true; loop();
-                } else if (!en.isIntersecting && running) {
-                  running = false;
-                  if (rafId) cancelAnimationFrame(rafId);
-                }
+                onScreen = en.isIntersecting;
+                if (onScreen) startLoop(); else stopLoop();
               });
             }, { threshold: 0.01 });
-            if (section) io.observe(section); else loop();
+            if (section) io.observe(section); else startLoop();
+            document.addEventListener('visibilitychange', () => {
+              if (document.hidden) stopLoop();
+              else if (onScreen) startLoop();
+            });
           }
         }
       }
@@ -354,6 +373,64 @@ document.addEventListener('DOMContentLoaded', () => {
       } catch (err) {
         fail();
       }
+    });
+  }
+
+
+  /* ========================================
+     TIMELINE — línea que se dibuja al scroll
+     + activación de nodos (solo transform/opacity)
+     ======================================== */
+  const tlTrack = document.querySelector('.tl-track');
+  const tlFill = document.querySelector('.tl-rail-fill');
+  const tlItems = Array.from(document.querySelectorAll('.tl-item'));
+  if (tlTrack && tlItems.length) {
+    if (prefersReduced) {
+      if (tlFill) tlFill.style.transform = 'scaleY(1)';
+      tlItems.forEach(it => it.classList.add('in-view'));
+    } else {
+      const rail = tlTrack.querySelector('.tl-rail') || tlTrack;
+      let ticking = false;
+      const update = () => {
+        ticking = false;
+        const railRect = rail.getBoundingClientRect();
+        const refLine = window.innerHeight * 0.68;
+        // progress along the rail (0..1)
+        const p = (refLine - railRect.top) / Math.max(railRect.height, 1);
+        const clamped = Math.max(0, Math.min(1, p));
+        if (tlFill) tlFill.style.setProperty('--tl-progress', clamped.toFixed(4));
+        // activate nodes whose dot has passed the reference line
+        tlItems.forEach(item => {
+          const node = item.querySelector('.tl-node');
+          const ny = (node || item).getBoundingClientRect().top + 28;
+          item.classList.toggle('in-view', ny <= refLine);
+        });
+      };
+      const onTlScroll = () => {
+        if (!ticking) { ticking = true; requestAnimationFrame(update); }
+      };
+      window.addEventListener('scroll', onTlScroll, { passive: true });
+      window.addEventListener('resize', onTlScroll, { passive: true });
+      update();
+    }
+  }
+
+
+  /* ========================================
+     MAGNETIC BUTTONS — micro-interacción táctil
+     (pointer fino · respeta reduced-motion)
+     ======================================== */
+  if (!prefersReduced && window.matchMedia('(pointer: fine)').matches) {
+    const clamp = (v, m) => Math.max(-m, Math.min(m, v));
+    document.querySelectorAll('[data-magnetic]').forEach(btn => {
+      const strength = 0.28, max = 9;
+      btn.addEventListener('mousemove', (e) => {
+        const r = btn.getBoundingClientRect();
+        const dx = clamp((e.clientX - (r.left + r.width / 2)) * strength, max);
+        const dy = clamp((e.clientY - (r.top + r.height / 2)) * strength, max);
+        btn.style.transform = `translate(${dx.toFixed(1)}px, ${(dy - 2).toFixed(1)}px)`;
+      });
+      btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
     });
   }
 

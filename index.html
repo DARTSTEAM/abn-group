@@ -21,7 +21,7 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300&display=swap" rel="stylesheet">
 
   <!-- Styles -->
   <link rel="stylesheet" href="style.css">
@@ -48,9 +48,27 @@
 
   <!-- ==================== HERO ==================== -->
   <section class="hero" id="hero">
+    <div class="hero-bg" aria-hidden="true">
+      <div class="hero-glow"></div>
+    </div>
+
     <div class="hero-content">
-      <img src="assets/ABN Group Logo - JP Ash W.svg" alt="ABN Group" class="hero-logo">
-      <p class="hero-tagline">Marketing · Data · Tecnología</p>
+      <div class="hero-eyebrow">
+        <img src="assets/ABN Group Logo - JP Ash W.svg" alt="ABN Group" class="hero-mark">
+      </div>
+
+      <h1 class="hero-headline" aria-label="Transformamos atención en resultados medibles.">
+        <span class="hero-line"><span class="line-inner">Transformamos</span></span>
+        <span class="hero-line"><span class="line-inner">atención en</span></span>
+        <span class="hero-line"><span class="line-inner"><em>resultados medibles.</em></span></span>
+      </h1>
+
+      <p class="hero-sub">Marketing, Data &amp; Tecnología operando como un solo sistema de crecimiento. Cuatro unidades, una misma visión.</p>
+
+      <div class="hero-actions">
+        <a href="#contacto" class="btn btn--solid btn--lg" data-magnetic data-unit="No estoy seguro"><span class="btn-label">Hablemos</span></a>
+        <a href="#unidades" class="btn btn--ghost btn--lg" data-magnetic><span class="btn-label">Conocé el grupo</span></a>
+      </div>
     </div>
 
     <a href="#vision" class="hero-scroll" aria-label="Desplazarse hacia abajo">
@@ -106,7 +124,7 @@
       <div class="section-label reveal">Nuestras unidades</div>
 
       <h2 class="units-heading reveal">
-        Cuatro compañías especializadas.<br>Un mismo sistema de crecimiento.
+        Cuatro compañías especializadas.<br><strong>Un mismo sistema de crecimiento.</strong>
       </h2>
 
       <div class="units-list">
@@ -204,7 +222,7 @@
       <!-- CTA interception before verticals -->
       <div class="units-cta reveal">
         <p class="units-cta-text">¿No sabés por dónde empezar?</p>
-        <a href="#contacto" class="btn btn--solid" data-unit="No estoy seguro">Hablemos de tu proyecto</a>
+        <a href="#contacto" class="btn btn--solid" data-magnetic data-unit="No estoy seguro"><span class="btn-label">Hablemos de tu proyecto</span></a>
       </div>
     </div>
   </section>
@@ -249,6 +267,7 @@
       </h2>
 
       <div class="tl-track">
+        <div class="tl-rail" aria-hidden="true"><span class="tl-rail-fill"></span></div>
 
         <div class="tl-item reveal reveal-d1" style="--unit: var(--green);">
           <div class="tl-year">2020</div>
@@ -259,20 +278,26 @@
               <span class="tl-tag">Fundación</span>
             </div>
             <h3 class="tl-title">ABN Digital</h3>
-            <p class="tl-desc">Todo empieza con medios de performance: campañas pagas diseñadas sobre datos y resultados.</p>
+            <p class="tl-desc">Todo empieza con medios de performance: campañas pagas diseñadas sobre datos y orientadas a resultados de negocio.</p>
+            <div class="tl-highlight"><span class="tl-highlight-dot" aria-hidden="true"></span>Primer cliente enterprise · performance-first</div>
           </div>
         </div>
 
-        <div class="tl-item reveal reveal-d2" style="--unit: var(--green);">
+        <div class="tl-item reveal reveal-d1" style="--unit: var(--green);">
           <div class="tl-year">2021</div>
           <div class="tl-node"></div>
           <div class="tl-card">
-            <h3 class="tl-title">Equipo de Data &amp; Tech</h3>
-            <p class="tl-desc">La agencia toma forma: medios digitales y analítica bajo un mismo techo, con foco en performance.</p>
+            <div class="tl-card-head">
+              <span class="tl-kicker">Data &amp; Tech</span>
+              <span class="tl-tag">Consolidación</span>
+            </div>
+            <h3 class="tl-title">Media, Data &amp; Analytics</h3>
+            <p class="tl-desc">La agencia toma forma: medios digitales y analítica bajo un mismo techo, con la medición como eje de cada decisión.</p>
+            <div class="tl-highlight"><span class="tl-highlight-dot" aria-hidden="true"></span>Medición como sistema operativo</div>
           </div>
         </div>
 
-        <div class="tl-item reveal reveal-d3" style="--unit: var(--lblue);">
+        <div class="tl-item reveal reveal-d1" style="--unit: var(--lblue);">
           <div class="tl-year">2022</div>
           <div class="tl-node"></div>
           <div class="tl-card">
@@ -281,11 +306,26 @@
               <span class="tl-tag">Producto</span>
             </div>
             <h3 class="tl-title">Detrics</h3>
-            <p class="tl-desc">Una solución de automatización de datos de marketing que resuelve la centralización para agencias en todo el mundo.</p>
+            <p class="tl-desc">Nace el primer producto propio: automatización de datos de marketing que resuelve la centralización para agencias.</p>
+            <div class="tl-highlight"><span class="tl-highlight-dot" aria-hidden="true"></span>Una sola fuente de verdad, en tiempo real</div>
           </div>
         </div>
 
-        <div class="tl-item reveal reveal-d4" style="--unit: var(--violet);">
+        <div class="tl-item reveal reveal-d1" style="--unit: var(--ash);">
+          <div class="tl-year">2023</div>
+          <div class="tl-node"></div>
+          <div class="tl-card">
+            <div class="tl-card-head">
+              <span class="tl-kicker">Cultura &amp; IA</span>
+              <span class="tl-tag">AI-first</span>
+            </div>
+            <h3 class="tl-title">La operación se vuelve AI-first</h3>
+            <p class="tl-desc">Detrics escala a operaciones globales y la inteligencia artificial entra al core: AI School, Tech Talks y sistemas de entrenamiento internos.</p>
+            <div class="tl-highlight"><span class="tl-highlight-dot" aria-hidden="true"></span>+40 países con datos unificados</div>
+          </div>
+        </div>
+
+        <div class="tl-item reveal reveal-d1" style="--unit: var(--violet);">
           <div class="tl-year">2024</div>
           <div class="tl-node"></div>
           <div class="tl-card">
@@ -294,11 +334,12 @@
               <span class="tl-tag">IA &amp; Cloud</span>
             </div>
             <h3 class="tl-title">Hike</h3>
-            <p class="tl-desc">IA, Cloud &amp; Tech para marketing: sistemas automatizados y tecnología propietaria sobre Google Cloud.</p>
+            <p class="tl-desc">IA, Cloud &amp; Tech para marketing: sistemas automatizados y tecnología propietaria construidos sobre Google Cloud.</p>
+            <div class="tl-highlight"><span class="tl-highlight-dot" aria-hidden="true"></span>Google Cloud Partner · +40% de eficiencia</div>
           </div>
         </div>
 
-        <div class="tl-item reveal reveal-d5" style="--unit: var(--orange);">
+        <div class="tl-item reveal reveal-d1" style="--unit: var(--orange);">
           <div class="tl-year">2025</div>
           <div class="tl-node"></div>
           <div class="tl-card">
@@ -307,11 +348,12 @@
               <span class="tl-tag">Creatividad</span>
             </div>
             <h3 class="tl-title">ABN Studio</h3>
-            <p class="tl-desc">Creación de contenido visual con IA: motion, video, avatares UGC y medios digitales de próxima generación.</p>
+            <p class="tl-desc">Creación de contenido visual con IA: motion, video, avatares UGC y piezas de próxima generación para escalar la producción.</p>
+            <div class="tl-highlight"><span class="tl-highlight-dot" aria-hidden="true"></span>10× más piezas por ciclo creativo</div>
           </div>
         </div>
 
-        <div class="tl-item tl-item--now reveal reveal-d6" style="--unit: var(--ash);">
+        <div class="tl-item tl-item--now reveal reveal-d1" style="--unit: var(--ash);">
           <div class="tl-year">2026</div>
           <div class="tl-node"></div>
           <div class="tl-card">
@@ -320,7 +362,8 @@
               <span class="tl-tag tl-tag--now">Hoy</span>
             </div>
             <h3 class="tl-title">ABN Group</h3>
-            <p class="tl-desc">Cuatro unidades operando como un solo sistema de crecimiento: medios, datos, tecnología y creatividad.</p>
+            <p class="tl-desc">Cuatro unidades operando como un solo sistema de crecimiento: medios, datos, tecnología y creatividad, de punta a punta.</p>
+            <div class="tl-highlight"><span class="tl-highlight-dot" aria-hidden="true"></span>4 unidades · 1 sistema · 40+ países</div>
           </div>
         </div>
 
@@ -346,12 +389,17 @@
       </ul>
 
       <!-- Casos con métricas -->
+      <div class="section-label section-label--sub reveal">Resultados con sustento</div>
       <div class="cases">
         <article class="case reveal reveal-d1" style="--unit: var(--green);">
           <header class="case-head">
-            <span class="case-client">Despegar</span>
+            <div class="case-head-main">
+              <span class="case-client">Despegar</span>
+              <span class="case-sector">Travel &amp; e-commerce · LatAm</span>
+            </div>
             <span class="case-tag">Media &amp; Performance</span>
           </header>
+          <p class="case-context">Reestructuramos la inversión en medios y la medición de punta a punta para escalar reservas sin resignar eficiencia.</p>
           <div class="case-metrics">
             <div class="case-metric">
               <span class="case-metric-num" data-target="1.3" data-prefix="US$" data-suffix="M" data-decimals="1">US$0M</span>
@@ -366,13 +414,18 @@
               <span class="case-metric-label">Eficiencia en medios</span>
             </div>
           </div>
+          <footer class="case-foot">Con <strong>ABN Digital</strong> + <strong>Detrics</strong></footer>
         </article>
 
         <article class="case reveal reveal-d2" style="--unit: var(--lblue);">
           <header class="case-head">
-            <span class="case-client">Unicomer</span>
+            <div class="case-head-main">
+              <span class="case-client">Unicomer</span>
+              <span class="case-sector">Retail · 26 países</span>
+            </div>
             <span class="case-tag">Growth &amp; Data</span>
           </header>
+          <p class="case-context">Unificamos las fuentes de datos y optimizamos la compra de medios para bajar el costo de adquisición y multiplicar ventas.</p>
           <div class="case-metrics">
             <div class="case-metric">
               <span class="case-metric-num" data-target="62" data-prefix="−" data-suffix="%">−0%</span>
@@ -383,6 +436,7 @@
               <span class="case-metric-label">En ventas y ROAS</span>
             </div>
           </div>
+          <footer class="case-foot">Con <strong>ABN Digital</strong> + <strong>Hike</strong></footer>
         </article>
       </div>
 
@@ -413,25 +467,41 @@
         </div>
 
         <div class="team-roles">
+          <p class="team-roles-label reveal">Cinco disciplinas, un mismo estándar</p>
           <div class="role reveal reveal-d1" style="--unit: var(--ash);">
-            <span class="role-mono">AG</span>
-            <div class="role-info"><span class="role-title">Dirección General</span><span class="role-area">Estrategia de grupo</span></div>
+            <span class="role-idx">01</span>
+            <div class="role-info">
+              <div class="role-top"><span class="role-title">Estrategia de grupo</span><span class="role-unit">Dirección General</span></div>
+              <span class="role-remit">Define la tesis de crecimiento y orquesta a las cuatro unidades como un solo sistema.</span>
+            </div>
           </div>
           <div class="role reveal reveal-d2" style="--unit: var(--green);">
-            <span class="role-mono">MP</span>
-            <div class="role-info"><span class="role-title">Head of Media &amp; Performance</span><span class="role-area">ABN Digital</span></div>
+            <span class="role-idx">02</span>
+            <div class="role-info">
+              <div class="role-top"><span class="role-title">Media &amp; Performance</span><span class="role-unit">ABN Digital</span></div>
+              <span class="role-remit">Planificación y compra de medios en +15 industrias, optimizada íntegramente sobre datos.</span>
+            </div>
           </div>
           <div class="role reveal reveal-d3" style="--unit: var(--lblue);">
-            <span class="role-mono">DA</span>
-            <div class="role-info"><span class="role-title">Head of Data &amp; Analytics</span><span class="role-area">Detrics</span></div>
+            <span class="role-idx">03</span>
+            <div class="role-info">
+              <div class="role-top"><span class="role-title">Data &amp; Analytics</span><span class="role-unit">Detrics</span></div>
+              <span class="role-remit">Infraestructura de datos y una sola fuente de verdad, medible en tiempo real.</span>
+            </div>
           </div>
           <div class="role reveal reveal-d4" style="--unit: var(--violet);">
-            <span class="role-mono">TA</span>
-            <div class="role-info"><span class="role-title">Head of Technology &amp; AI</span><span class="role-area">Hike</span></div>
+            <span class="role-idx">04</span>
+            <div class="role-info">
+              <div class="role-top"><span class="role-title">Technology &amp; AI</span><span class="role-unit">Hike</span></div>
+              <span class="role-remit">Automatización y tecnología propietaria sobre Google Cloud, con IA a escala.</span>
+            </div>
           </div>
           <div class="role reveal reveal-d5" style="--unit: var(--orange);">
-            <span class="role-mono">CR</span>
-            <div class="role-info"><span class="role-title">Head of Creative</span><span class="role-area">ABN Studio</span></div>
+            <span class="role-idx">05</span>
+            <div class="role-info">
+              <div class="role-top"><span class="role-title">Creative &amp; Content</span><span class="role-unit">ABN Studio</span></div>
+              <span class="role-remit">Producción creativa potenciada por IA: motion, video y avatares UGC a escala.</span>
+            </div>
           </div>
         </div>
       </div>
@@ -481,8 +551,8 @@
           <textarea id="f-mensaje" name="mensaje" rows="4" required></textarea>
         </div>
         <div class="field field--full form-actions">
-          <button type="submit" class="btn btn--solid btn--lg">Hablemos de tu proyecto</button>
-          <a href="mailto:contacto@abngroup.com?subject=Agendar%20una%20llamada" class="btn btn--ghost btn--lg">Agendá una llamada</a>
+          <button type="submit" class="btn btn--solid btn--lg" data-magnetic><span class="btn-label">Hablemos de tu proyecto</span></button>
+          <a href="mailto:contacto@abngroup.com?subject=Agendar%20una%20llamada" class="btn btn--ghost btn--lg" data-magnetic><span class="btn-label">Agendá una llamada</span></a>
         </div>
         <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
       </form>
