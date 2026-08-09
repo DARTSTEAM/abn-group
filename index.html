@@ -1,18 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- SEO -->
-  <title>ABN Group — Technology, Media & Cloud Solutions</title>
-  <meta name="description" content="ABN Group unites four companies driving innovation in digital media, cloud solutions, AI content, and data analytics.">
-  <meta name="keywords" content="ABN Group, ABN Digital, ABN Studio, Hike, Detrics, technology, cloud, AI, data analytics">
+  <title>ABN Group — Marketing, Data & Tecnología</title>
+  <meta name="description" content="ABN Group impulsa el crecimiento digital de empresas a través de una visión integrada que combina Marketing, Data y Tecnología. Cuatro unidades: ABN Digital, ABN Studio, Detrics y Hike.">
+  <meta name="keywords" content="ABN Group, ABN Digital, ABN Studio, Detrics, Hike, marketing, data, tecnología, inteligencia artificial, performance">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="ABN Group — Technology, Media & Cloud Solutions">
-  <meta property="og:description" content="Four companies. One vision. Technology that moves.">
+  <meta property="og:title" content="ABN Group — Marketing, Data & Tecnología">
+  <meta property="og:description" content="Cuatro unidades. Una visión integrada. Transformamos atención en resultados medibles.">
   <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_AR">
 
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="assets/ABN Icon - JP Ash W.svg">
@@ -20,7 +21,7 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300&display=swap" rel="stylesheet">
 
   <!-- Styles -->
   <link rel="stylesheet" href="style.css">
@@ -28,266 +29,298 @@
 
 <body>
 
+  <a href="#vision" class="skip-link">Saltar al contenido</a>
+
   <!-- ==================== NAVIGATION ==================== -->
   <nav class="nav" id="nav">
-    <a href="#hero" class="nav-logo">
+    <a href="#hero" class="nav-logo" aria-label="ABN Group — inicio">
       <img src="assets/ABN Icon - JP Ash W.svg" alt="ABN Group">
     </a>
     <div class="nav-links">
-      <a href="#companies" class="nav-link">Companies</a>
-      <a href="#services" class="nav-link">Services</a>
-      <a href="#story" class="nav-link">Story</a>
-      <a href="#contact" class="nav-link">Contact</a>
+      <a href="#vision" class="nav-link">Grupo</a>
+      <a href="#unidades" class="nav-link">Unidades</a>
+      <a href="#clientes" class="nav-link">Clientes</a>
+      <a href="#equipo" class="nav-link">Equipo</a>
+      <a href="#contacto" class="nav-cta">Hablemos</a>
     </div>
   </nav>
 
 
   <!-- ==================== HERO ==================== -->
   <section class="hero" id="hero">
-    <canvas class="hero-gradient" id="hero-canvas"></canvas>
-
     <div class="hero-content">
       <img src="assets/ABN Group Logo - JP Ash W.svg" alt="ABN Group" class="hero-logo">
-      <p class="hero-tagline">Technology, Media & Cloud Solutions</p>
+      <p class="hero-tagline">Marketing · Data · Tecnología</p>
     </div>
 
-    <div class="hero-scroll">
+    <a href="#vision" class="hero-scroll" aria-label="Desplazarse hacia abajo">
       <div class="hero-scroll-line"></div>
-    </div>
+    </a>
 
     <div class="hero-bottom">
-      <span class="hero-bottom-left">Digital · Studio · Cloud · Data</span>
-      <span class="hero-bottom-center">Four Companies. One Vision.</span>
-      <span class="hero-bottom-right">2025</span>
+      <span class="hero-bottom-left">Digital · Studio · Detrics · Hike</span>
+      <span class="hero-bottom-center">Cuatro unidades. Una visión.</span>
+      <span class="hero-bottom-right">2026</span>
     </div>
   </section>
 
 
-  <!-- ==================== COMPANIES ==================== -->
-  <section class="work" id="companies">
+  <!-- ==================== VISIÓN / WHY ABN GROUP ==================== -->
+  <section class="vision" id="vision">
     <div class="container">
-      <div class="section-label reveal">Our Companies</div>
+      <div class="section-label reveal">Nuestra visión</div>
 
-      <div class="companies-grid">
+      <div class="vision-grid">
+        <h2 class="vision-heading reveal">
+          Impulsamos el crecimiento digital de empresas a través de una visión integrada que combina <em>Marketing, Data&nbsp;&&nbsp;Tecnología.</em>
+        </h2>
+
+        <div class="vision-body">
+          <p class="vision-lead reveal reveal-d1">Ofrecemos soluciones estratégicas basadas en datos, inteligencia artificial y ejecución de alto nivel, ayudando a las compañías a transformar atención en resultados medibles.</p>
+          <p class="vision-text reveal reveal-d2">Nace para responder a los nuevos desafíos del crecimiento digital. En un entorno donde las herramientas, los datos y las plataformas evolucionan constantemente, las empresas necesitan sistemas integrados que les permitan trabajar con mayor claridad, eficiencia y velocidad.</p>
+        </div>
+      </div>
+
+      <!-- Cifras de trayectoria -->
+      <div class="stats-strip">
+        <div class="stat reveal reveal-d1">
+          <span class="stat-num" data-target="40" data-prefix="+">+0</span>
+          <span class="stat-label">Países</span>
+        </div>
+        <div class="stat reveal reveal-d2">
+          <span class="stat-num" data-target="15" data-prefix="+">+0</span>
+          <span class="stat-label">Industrias</span>
+        </div>
+        <div class="stat reveal reveal-d3">
+          <span class="stat-num" data-target="200" data-prefix="$" data-suffix="M">$0M</span>
+          <span class="stat-label">De inversión anual gestionada</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==================== UNIDADES (Companies + Services fused) ==================== -->
+  <section class="units" id="unidades">
+    <div class="container">
+      <div class="section-label reveal">Nuestras unidades</div>
+
+      <h2 class="units-heading reveal">
+        Cuatro compañías especializadas.<br>Un mismo sistema de crecimiento.
+      </h2>
+
+      <div class="units-list">
 
         <!-- ABN Digital -->
-        <a href="https://abndigital.com.ar/" target="_blank" rel="noopener noreferrer" class="company-link reveal reveal-d1">
-          <div class="company-card">
-            <img src="assets/ABN Digital Gradientes (JP)-01.svg" alt="" class="company-card-bg">
-            <div class="company-card-logo">
-              <img src="assets/ABN Digital Logo - JP Ash W.svg" alt="ABN Digital">
+        <article class="unit reveal reveal-d1" style="--unit: var(--green);">
+          <div class="unit-visual">
+            <img src="assets/ABN Digital Gradientes (JP)-01.svg" alt="" class="unit-bg" loading="lazy">
+            <div class="unit-logo"><img src="assets/ABN Digital Logo - JP Ash W.svg" alt="ABN Digital"></div>
+          </div>
+          <div class="unit-body">
+            <span class="unit-num">01</span>
+            <h3 class="unit-name">ABN Digital</h3>
+            <p class="unit-kicker">Medios &amp; Analytics de performance</p>
+            <p class="unit-desc">Estrategia, medios y tecnología para marcas modernas. Campañas de performance diseñadas sobre datos y orientadas a resultados de negocio.</p>
+            <div class="unit-result">
+              <span class="unit-result-num">×2.6</span>
+              <span class="unit-result-txt">en ventas y ROAS con clientes enterprise</span>
+            </div>
+            <div class="unit-actions">
+              <button type="button" class="unit-cta" data-unit="ABN Digital">Hablemos</button>
+              <a href="https://abndigital.com.ar/" target="_blank" rel="noopener noreferrer" class="unit-link">Ver sitio<span aria-hidden="true"> →</span></a>
             </div>
           </div>
-          <span class="company-caption">Digital Media & Analytics</span>
-        </a>
+        </article>
 
         <!-- ABN Studio -->
-        <a href="https://dartsteam.github.io/abn-studio/v2/" target="_blank" rel="noopener noreferrer" class="company-link reveal reveal-d2">
-          <div class="company-card">
-            <img src="assets/ABN Studio Gradientes (JP)-02.svg" alt="" class="company-card-bg">
-            <div class="company-card-logo">
-              <img src="assets/ABN Studio Logo - JP Ash W.svg" alt="ABN Studio">
+        <article class="unit reveal reveal-d2" style="--unit: var(--orange);">
+          <div class="unit-visual">
+            <img src="assets/ABN Studio Gradientes (JP)-02.svg" alt="" class="unit-bg" loading="lazy">
+            <div class="unit-logo"><img src="assets/ABN Studio Logo - JP Ash W.svg" alt="ABN Studio"></div>
+          </div>
+          <div class="unit-body">
+            <span class="unit-num">02</span>
+            <h3 class="unit-name">ABN Studio</h3>
+            <p class="unit-kicker">Contenido &amp; creatividad con IA</p>
+            <p class="unit-desc">Creación de contenido visual potenciada por inteligencia artificial: motion, video, avatares UGC y piezas de próxima generación para escalar la producción.</p>
+            <div class="unit-result">
+              <span class="unit-result-num">10×</span>
+              <span class="unit-result-txt">más piezas producidas por ciclo creativo</span>
+            </div>
+            <div class="unit-actions">
+              <button type="button" class="unit-cta" data-unit="ABN Studio">Hablemos</button>
+              <a href="https://dartsteam.github.io/abn-studio/v2/" target="_blank" rel="noopener noreferrer" class="unit-link">Ver sitio<span aria-hidden="true"> →</span></a>
             </div>
           </div>
-          <span class="company-caption">Branding & AI Content</span>
-        </a>
+        </article>
 
         <!-- Detrics -->
-        <a href="https://detrics.io/" target="_blank" rel="noopener noreferrer" class="company-link reveal reveal-d3">
-          <div class="company-card">
-            <img src="assets/ABN Detrics Gradientes (JP)-03.svg" alt="" class="company-card-bg">
-            <div class="company-card-logo">
-              <img src="assets/ABN Detrics JP.svg" alt="Detrics">
+        <article class="unit reveal reveal-d3" style="--unit: var(--lblue);">
+          <div class="unit-visual">
+            <img src="assets/ABN Detrics Gradientes (JP)-03.svg" alt="" class="unit-bg" loading="lazy">
+            <div class="unit-logo"><img src="assets/ABN Detrics JP.svg" alt="Detrics"></div>
+          </div>
+          <div class="unit-body">
+            <span class="unit-num">03</span>
+            <h3 class="unit-name">Detrics</h3>
+            <p class="unit-kicker">Automatización de datos · SaaS B2B</p>
+            <p class="unit-desc">Software como servicio que resuelve la centralización y automatización de datos de marketing para agencias en todo el mundo. Una sola fuente de verdad, en tiempo real.</p>
+            <div class="unit-result">
+              <span class="unit-result-num">+40</span>
+              <span class="unit-result-txt">países con datos unificados en una plataforma</span>
+            </div>
+            <div class="unit-actions">
+              <button type="button" class="unit-cta" data-unit="Detrics">Hablemos</button>
+              <a href="https://detrics.io/" target="_blank" rel="noopener noreferrer" class="unit-link">Ver sitio<span aria-hidden="true"> →</span></a>
             </div>
           </div>
-          <span class="company-caption">Data Automation</span>
-        </a>
+        </article>
 
         <!-- Hike -->
-        <a href="https://www.hikethecloud.com/" target="_blank" rel="noopener noreferrer" class="company-link reveal reveal-d4">
-          <div class="company-card">
-            <img src="assets/ABN Hike Gradientes (JP)-04.svg" alt="" class="company-card-bg">
-            <div class="company-card-logo">
-              <img src="assets/ABN Hike JP.svg" alt="Hike">
+        <article class="unit reveal reveal-d4" style="--unit: var(--violet);">
+          <div class="unit-visual">
+            <img src="assets/ABN Hike Gradientes (JP)-04.svg" alt="" class="unit-bg" loading="lazy">
+            <div class="unit-logo"><img src="assets/ABN Hike JP.svg" alt="Hike"></div>
+          </div>
+          <div class="unit-body">
+            <span class="unit-num">04</span>
+            <h3 class="unit-name">Hike</h3>
+            <p class="unit-kicker">IA, Cloud &amp; Tecnología para marketing</p>
+            <p class="unit-desc">Sistemas automatizados y tecnología propietaria construidos sobre Google Cloud. Partner de Google Cloud que impulsa eficiencia operativa y adopción de IA a escala.</p>
+            <div class="unit-result">
+              <span class="unit-result-num">+40%</span>
+              <span class="unit-result-txt">de eficiencia operativa en procesos de medios</span>
+            </div>
+            <div class="unit-actions">
+              <button type="button" class="unit-cta" data-unit="Hike">Hablemos</button>
+              <a href="https://www.hikethecloud.com/" target="_blank" rel="noopener noreferrer" class="unit-link">Ver sitio<span aria-hidden="true"> →</span></a>
             </div>
           </div>
-          <span class="company-caption">AI, Data & Tech for Marketing</span>
-        </a>
+        </article>
 
+      </div>
+
+      <!-- CTA interception before verticals -->
+      <div class="units-cta reveal">
+        <p class="units-cta-text">¿No sabés por dónde empezar?</p>
+        <a href="#contacto" class="btn btn--solid" data-unit="No estoy seguro">Hablemos de tu proyecto</a>
       </div>
     </div>
   </section>
 
 
-  <!-- ==================== SERVICES ==================== -->
-  <section class="services" id="services">
-    <div class="container">
-      <div class="section-label reveal">Services</div>
+  <!-- ==================== INTEGRACIÓN / AURORA ==================== -->
+  <section class="integration" id="integracion">
+    <canvas class="aurora-canvas" id="aurora-canvas" aria-hidden="true"></canvas>
+    <div class="integration-fallback" aria-hidden="true"></div>
 
-      <div class="services-grid">
+    <div class="container integration-inner">
+      <div class="section-label section-label--center reveal">La integración</div>
 
-        <a href="https://abndigital.com.ar/" target="_blank" rel="noopener noreferrer" class="service-item reveal reveal-d1">
-          <span class="service-num">01</span>
-          <h3 class="service-title">ABN Digital</h3>
-          <p class="service-desc">Full-service digital marketing and technology solutions. Strategy, development, and growth for modern brands.</p>
-        </a>
+      <h2 class="integration-heading reveal">
+        No somos una agencia.<br>Somos un <em>sistema de crecimiento</em> integrado.
+      </h2>
 
-        <a href="https://dartsteam.github.io/abn-studio/v2/" target="_blank" rel="noopener noreferrer" class="service-item reveal reveal-d2">
-          <span class="service-num">02</span>
-          <h3 class="service-title">ABN Studio</h3>
-          <p class="service-desc">AI-powered visual content creation. Motion, video, UGC avatars, and next-generation digital media.</p>
-        </a>
+      <p class="integration-text reveal reveal-d1">
+        Medios, datos, tecnología y creatividad operando bajo una misma lógica. A través de sus cuatro unidades, el grupo cubre el ciclo completo de punta a punta —adquisición, medición, optimización y escala— para ejecutar con velocidad, aprender con profundidad y escalar con consistencia.
+      </p>
 
-        <a href="https://www.hikethecloud.com/" target="_blank" rel="noopener noreferrer" class="service-item reveal reveal-d3">
-          <span class="service-num">03</span>
-          <h3 class="service-title">Hike</h3>
-          <p class="service-desc">Cloud infrastructure and workspace automation. Google Cloud Partner driving operational efficiency.</p>
-        </a>
-
-        <a href="https://detrics.io/" target="_blank" rel="noopener noreferrer" class="service-item reveal reveal-d4">
-          <span class="service-num">04</span>
-          <h3 class="service-title">Detrics</h3>
-          <p class="service-desc">Software as a Service B2B: a data automation solution that solves data centralization for agencies worldwide.</p>
-        </a>
-
+      <div class="integration-flow reveal reveal-d2">
+        <span class="flow-step" style="--unit: var(--green);">Adquisición</span>
+        <span class="flow-arrow" aria-hidden="true">→</span>
+        <span class="flow-step" style="--unit: var(--lblue);">Medición</span>
+        <span class="flow-arrow" aria-hidden="true">→</span>
+        <span class="flow-step" style="--unit: var(--violet);">Optimización</span>
+        <span class="flow-arrow" aria-hidden="true">→</span>
+        <span class="flow-step" style="--unit: var(--orange);">Escala</span>
       </div>
     </div>
   </section>
 
 
-  <!-- ==================== STORY / WHY ABN ==================== -->
-  <section class="story" id="story">
+  <!-- ==================== TRAYECTORIA / TIMELINE ==================== -->
+  <section class="timeline" id="trayectoria">
     <div class="container">
-      <div class="section-label reveal">Why ABN Group</div>
-
-      <div class="story-grid">
-        <div class="story-lead">
-          <h2 class="story-heading reveal">
-            We are not optimizing<br>the old marketing model.<br>
-            <em>We are built on a new one.</em>
-          </h2>
-        </div>
-
-        <div class="story-body">
-          <p class="story-text reveal">The marketing industry is going through the deepest shift in its history. Data, omnichannel and artificial intelligence are redefining how brands grow, acquire users and build value.</p>
-
-          <p class="story-text reveal">ABN Group was born inside this new paradigm. It is not a company adapting to the transformation. It was designed from day one to operate in this context, with data, technology and performance as its structural foundation.</p>
-
-          <p class="story-text reveal">ABN Group is not an agency. It is an integrated growth system that brings media, data, technology and creativity together under a single operating logic. Through its units — ABN Digital, Hike, Detrics and ABN Studio — the group covers the full cycle end to end: acquisition, measurement, optimization and scale.</p>
-
-          <p class="story-text reveal">That integration unlocks something few companies achieve: executing with speed, learning with depth and scaling with consistency.</p>
-        </div>
-      </div>
-
-      <div class="story-pillars">
-        <div class="story-pillar reveal reveal-d1">
-          <span class="story-pillar-num">01</span>
-          <h3 class="story-pillar-title">A system of execution and continuous improvement</h3>
-          <p class="story-pillar-desc">Every process, decision and result is documented and structured. This builds a compounding asset of knowledge that sharpens execution over time, reduces errors and lets the group scale while keeping standards high. It is not just experience. It is a system that learns.</p>
-        </div>
-        <div class="story-pillar reveal reveal-d2">
-          <span class="story-pillar-num">02</span>
-          <h3 class="story-pillar-title">A high-standards culture with real autonomy</h3>
-          <p class="story-pillar-desc">Clear, measurable standards of excellence are shared across every team, combined with a culture of autonomy, accountability and transparency that sustains speed without losing control. Talent density and execution capacity are a defining edge.</p>
-        </div>
-        <div class="story-pillar reveal reveal-d3">
-          <span class="story-pillar-num">03</span>
-          <h3 class="story-pillar-title">Structural adoption of technology and AI</h3>
-          <p class="story-pillar-desc">Artificial intelligence is not an add-on. It is part of how the business runs. The group develops internal capabilities continuously — AI School, Tech Talks, training systems — while building proprietary technology it can use and commercialize, creating operating leverage.</p>
-        </div>
-      </div>
-
-      <div class="story-close">
-        <p class="story-text reveal">Where many marketing companies face structural limits — people-intensive models, low standardization, difficulty incorporating technology — ABN runs on a different architecture: lighter, more integrated and built to scale.</p>
-        <p class="story-text reveal">It combines the best of two worlds: the execution capacity of a services company with the asset-building logic of a technology company.</p>
-        <p class="story-text story-text--lead reveal">ABN is not optimizing the traditional marketing model. <em>It is built on a new one.</em></p>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ==================== TIMELINE / GROWTH ==================== -->
-  <section class="timeline" id="timeline">
-    <div class="container">
-      <div class="section-label reveal">Our Growth</div>
+      <div class="section-label reveal">Nuestra trayectoria</div>
 
       <h2 class="timeline-heading reveal">
-        From a performance team<br>to an <em>integrated group</em>
+        De un equipo de performance<br>a un <em>grupo integrado</em>
       </h2>
 
       <div class="tl-track">
 
-        <div class="tl-item reveal reveal-d1">
+        <div class="tl-item reveal reveal-d1" style="--unit: var(--green);">
           <div class="tl-year">2020</div>
           <div class="tl-node"></div>
           <div class="tl-card">
             <div class="tl-card-head">
               <img src="assets/ABN Digital Logo - JP Ash W.svg" alt="ABN Digital" class="tl-logo tl-logo--abn-digital">
-              <span class="tl-tag">Foundation</span>
+              <span class="tl-tag">Fundación</span>
             </div>
             <h3 class="tl-title">ABN Digital</h3>
-            <p class="tl-desc">It begins with performance media — paid campaigns engineered on data and results.</p>
+            <p class="tl-desc">Todo empieza con medios de performance: campañas pagas diseñadas sobre datos y resultados.</p>
           </div>
         </div>
 
-        <div class="tl-item reveal reveal-d2">
+        <div class="tl-item reveal reveal-d2" style="--unit: var(--green);">
           <div class="tl-year">2021</div>
           <div class="tl-node"></div>
           <div class="tl-card">
-            <h3 class="tl-title">Data and Tech Team</h3>
-            <p class="tl-desc">The agency takes shape: digital media and analytics under one roof, focused on performance.</p>
+            <h3 class="tl-title">Equipo de Data &amp; Tech</h3>
+            <p class="tl-desc">La agencia toma forma: medios digitales y analítica bajo un mismo techo, con foco en performance.</p>
           </div>
         </div>
 
-        <div class="tl-item reveal reveal-d3">
+        <div class="tl-item reveal reveal-d3" style="--unit: var(--lblue);">
           <div class="tl-year">2022</div>
           <div class="tl-node"></div>
           <div class="tl-card">
             <div class="tl-card-head">
               <img src="assets/ABN Detrics JP.svg" alt="Detrics" class="tl-logo tl-logo--detrics">
-              <span class="tl-tag">Product</span>
+              <span class="tl-tag">Producto</span>
             </div>
             <h3 class="tl-title">Detrics</h3>
-            <p class="tl-desc">A marketing data automation solution that solves data centralization for agencies worldwide.</p>
+            <p class="tl-desc">Una solución de automatización de datos de marketing que resuelve la centralización para agencias en todo el mundo.</p>
           </div>
         </div>
 
-        <div class="tl-item reveal reveal-d4">
+        <div class="tl-item reveal reveal-d4" style="--unit: var(--violet);">
           <div class="tl-year">2024</div>
           <div class="tl-node"></div>
           <div class="tl-card">
             <div class="tl-card-head">
               <img src="assets/ABN Hike JP.svg" alt="Hike" class="tl-logo tl-logo--hike">
-              <span class="tl-tag">AI &amp; Cloud</span>
+              <span class="tl-tag">IA &amp; Cloud</span>
             </div>
             <h3 class="tl-title">Hike</h3>
-            <p class="tl-desc">AI, Cloud &amp; Tech for marketing — automated systems and proprietary technology built on Google Cloud.</p>
+            <p class="tl-desc">IA, Cloud &amp; Tech para marketing: sistemas automatizados y tecnología propietaria sobre Google Cloud.</p>
           </div>
         </div>
 
-        <div class="tl-item reveal reveal-d5">
-          <div class="tl-year">2026</div>
+        <div class="tl-item reveal reveal-d5" style="--unit: var(--orange);">
+          <div class="tl-year">2025</div>
           <div class="tl-node"></div>
           <div class="tl-card">
             <div class="tl-card-head">
               <img src="assets/ABN Studio Logo - JP Ash W.svg" alt="ABN Studio" class="tl-logo tl-logo--abn-studio">
-              <span class="tl-tag">Creative</span>
+              <span class="tl-tag">Creatividad</span>
             </div>
             <h3 class="tl-title">ABN Studio</h3>
-            <p class="tl-desc">AI-powered visual content creation — motion, video, UGC avatars, and next-generation digital media.</p>
+            <p class="tl-desc">Creación de contenido visual con IA: motion, video, avatares UGC y medios digitales de próxima generación.</p>
           </div>
         </div>
 
-        <div class="tl-item tl-item--now reveal reveal-d6">
+        <div class="tl-item tl-item--now reveal reveal-d6" style="--unit: var(--ash);">
           <div class="tl-year">2026</div>
           <div class="tl-node"></div>
           <div class="tl-card">
             <div class="tl-card-head">
               <img src="assets/ABN Group Logo - JP Ash W.svg" alt="ABN Group" class="tl-logo tl-logo--abn-group">
-              <span class="tl-tag tl-tag--now">Today</span>
+              <span class="tl-tag tl-tag--now">Hoy</span>
             </div>
             <h3 class="tl-title">ABN Group</h3>
-            <p class="tl-desc">Four units operating as one integrated growth system — media, data, technology and creativity.</p>
+            <p class="tl-desc">Cuatro unidades operando como un solo sistema de crecimiento: medios, datos, tecnología y creatividad.</p>
           </div>
         </div>
 
@@ -296,22 +329,170 @@
   </section>
 
 
-  <!-- ==================== CONTACT ==================== -->
-  <section class="contact" id="contact">
+  <!-- ==================== CLIENTES / PRUEBA SOCIAL ==================== -->
+  <section class="clients" id="clientes">
     <div class="container">
-      <div class="section-label reveal" style="justify-content: center;">Get in Touch</div>
+      <div class="section-label reveal">Confían en nosotros</div>
 
-      <h2 class="contact-heading reveal">
-        Let's build something<br><em>extraordinary</em>
-      </h2>
+      <ul class="client-wall reveal" aria-label="Marcas que confían en ABN Group">
+        <li class="client">Despegar</li>
+        <li class="client">Banco Galicia</li>
+        <li class="client">AstroPay</li>
+        <li class="client">Andrómaco</li>
+        <li class="client">Unicomer</li>
+        <li class="client">DIRECTV</li>
+        <li class="client">Cocos</li>
+        <li class="client">Sodimac</li>
+      </ul>
 
-      <a href="mailto:contacto@abndigital.com.ar" class="contact-email reveal reveal-d1" id="contact-email">
-        contacto@abndigital.com.ar
-      </a>
+      <!-- Casos con métricas -->
+      <div class="cases">
+        <article class="case reveal reveal-d1" style="--unit: var(--green);">
+          <header class="case-head">
+            <span class="case-client">Despegar</span>
+            <span class="case-tag">Media &amp; Performance</span>
+          </header>
+          <div class="case-metrics">
+            <div class="case-metric">
+              <span class="case-metric-num" data-target="1.3" data-prefix="US$" data-suffix="M" data-decimals="1">US$0M</span>
+              <span class="case-metric-label">Ahorrados en inversión</span>
+            </div>
+            <div class="case-metric">
+              <span class="case-metric-num" data-target="44" data-prefix="+" data-suffix="M">+0M</span>
+              <span class="case-metric-label">Usuarios únicos alcanzados</span>
+            </div>
+            <div class="case-metric">
+              <span class="case-metric-num" data-target="40" data-prefix="+" data-suffix="%">+0%</span>
+              <span class="case-metric-label">Eficiencia en medios</span>
+            </div>
+          </div>
+        </article>
 
-      <div class="contact-social reveal reveal-d2">
-        <span>Follow us —</span>
-        <a href="https://instagram.com/abndigital" target="_blank" rel="noopener noreferrer" id="instagram-link">Instagram</a>
+        <article class="case reveal reveal-d2" style="--unit: var(--lblue);">
+          <header class="case-head">
+            <span class="case-client">Unicomer</span>
+            <span class="case-tag">Growth &amp; Data</span>
+          </header>
+          <div class="case-metrics">
+            <div class="case-metric">
+              <span class="case-metric-num" data-target="62" data-prefix="−" data-suffix="%">−0%</span>
+              <span class="case-metric-label">Reducción de CPA</span>
+            </div>
+            <div class="case-metric">
+              <span class="case-metric-num" data-target="2.6" data-prefix="×" data-decimals="1">×0</span>
+              <span class="case-metric-label">En ventas y ROAS</span>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <!-- Badges / partners -->
+      <ul class="badges reveal" aria-label="Reconocimientos y partnerships">
+        <li class="badge">#1 Great Place to Work · Argentina 2026</li>
+        <li class="badge">Google Marketing Platform Partner</li>
+        <li class="badge">Partners de Google, Meta &amp; TikTok</li>
+        <li class="badge">Universidad Austral</li>
+      </ul>
+    </div>
+  </section>
+
+
+  <!-- ==================== EQUIPO / LIDERAZGO ==================== -->
+  <section class="team" id="equipo">
+    <div class="container">
+      <div class="section-label reveal">Equipo &amp; liderazgo</div>
+
+      <div class="team-grid">
+        <div class="team-lead">
+          <h2 class="team-heading reveal">Detrás de cada resultado,<br>un <em>equipo denso en talento.</em></h2>
+          <p class="team-text reveal reveal-d1">Operamos con una cultura de estándares altos, autonomía real y transparencia. Formamos continuamente a nuestros equipos —AI School, Tech Talks, sistemas de entrenamiento— para que la tecnología y la inteligencia artificial estén en el core de cómo trabajamos.</p>
+          <p class="team-badge reveal reveal-d2">
+            <span class="team-badge-mark">#1</span>
+            <span class="team-badge-txt">Great Place to Work · Argentina 2026</span>
+          </p>
+        </div>
+
+        <div class="team-roles">
+          <div class="role reveal reveal-d1" style="--unit: var(--ash);">
+            <span class="role-mono">AG</span>
+            <div class="role-info"><span class="role-title">Dirección General</span><span class="role-area">Estrategia de grupo</span></div>
+          </div>
+          <div class="role reveal reveal-d2" style="--unit: var(--green);">
+            <span class="role-mono">MP</span>
+            <div class="role-info"><span class="role-title">Head of Media &amp; Performance</span><span class="role-area">ABN Digital</span></div>
+          </div>
+          <div class="role reveal reveal-d3" style="--unit: var(--lblue);">
+            <span class="role-mono">DA</span>
+            <div class="role-info"><span class="role-title">Head of Data &amp; Analytics</span><span class="role-area">Detrics</span></div>
+          </div>
+          <div class="role reveal reveal-d4" style="--unit: var(--violet);">
+            <span class="role-mono">TA</span>
+            <div class="role-info"><span class="role-title">Head of Technology &amp; AI</span><span class="role-area">Hike</span></div>
+          </div>
+          <div class="role reveal reveal-d5" style="--unit: var(--orange);">
+            <span class="role-mono">CR</span>
+            <div class="role-info"><span class="role-title">Head of Creative</span><span class="role-area">ABN Studio</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==================== CONTACTO ==================== -->
+  <section class="contact" id="contacto">
+    <div class="container contact-inner">
+      <div class="section-label reveal">Contacto</div>
+
+      <h2 class="contact-heading reveal">Construyamos algo<br><em>extraordinario.</em></h2>
+      <p class="contact-sub reveal reveal-d1">Contanos sobre tu proyecto y armamos el equipo indicado para vos.</p>
+
+      <!--
+        Formulario real. Para activarlo, reemplazá el action con tu endpoint
+        (Formspree, Basin, tu backend, etc.). Mientras contenga "your-form-id"
+        el envío se procesa en el cliente para la demo.
+      -->
+      <form class="contact-form reveal reveal-d2" id="contact-form"
+            action="https://formspree.io/f/your-form-id" method="POST" novalidate>
+        <div class="field">
+          <label for="f-nombre">Nombre</label>
+          <input type="text" id="f-nombre" name="nombre" autocomplete="name" required>
+        </div>
+        <div class="field">
+          <label for="f-empresa">Empresa</label>
+          <input type="text" id="f-empresa" name="empresa" autocomplete="organization" required>
+        </div>
+        <div class="field">
+          <label for="f-email">Email</label>
+          <input type="email" id="f-email" name="email" autocomplete="email" required>
+        </div>
+        <div class="field">
+          <label for="f-unidad">Unidad de interés</label>
+          <select id="f-unidad" name="unidad" required>
+            <option value="No estoy seguro">No estoy seguro / Asesoramiento general</option>
+            <option value="ABN Digital">ABN Digital — Medios &amp; Performance</option>
+            <option value="ABN Studio">ABN Studio — Contenido &amp; Creatividad</option>
+            <option value="Detrics">Detrics — Automatización de datos</option>
+            <option value="Hike">Hike — IA, Cloud &amp; Tecnología</option>
+          </select>
+        </div>
+        <div class="field field--full">
+          <label for="f-mensaje">Mensaje</label>
+          <textarea id="f-mensaje" name="mensaje" rows="4" required></textarea>
+        </div>
+        <div class="field field--full form-actions">
+          <button type="submit" class="btn btn--solid btn--lg">Hablemos de tu proyecto</button>
+          <a href="mailto:contacto@abngroup.com?subject=Agendar%20una%20llamada" class="btn btn--ghost btn--lg">Agendá una llamada</a>
+        </div>
+        <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+      </form>
+
+      <div class="contact-alt reveal reveal-d3">
+        <a href="mailto:contacto@abngroup.com" class="contact-email">contacto@abngroup.com</a>
+        <div class="contact-social">
+          <span>Seguinos —</span>
+          <a href="https://instagram.com/abndigital" target="_blank" rel="noopener noreferrer">Instagram</a>
+        </div>
       </div>
     </div>
   </section>
@@ -320,10 +501,10 @@
   <!-- ==================== FOOTER ==================== -->
   <footer class="footer">
     <div class="footer-inner">
-      <a href="#hero" class="footer-logo">
+      <a href="#hero" class="footer-logo" aria-label="ABN Group — inicio">
         <img src="assets/ABN Group Logo - JP Ash W.svg" alt="ABN Group">
       </a>
-      <span class="footer-copy">© 2025 ABN Group. All rights reserved.</span>
+      <span class="footer-copy">© 2026 ABN Group. Todos los derechos reservados.</span>
     </div>
   </footer>
 
