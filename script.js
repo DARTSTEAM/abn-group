@@ -417,6 +417,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   /* ========================================
+     HERO — pausar la aurora de fondo fuera del viewport (perf)
+     ======================================== */
+  const heroEl = document.getElementById('hero');
+  if (heroEl && !prefersReduced && 'IntersectionObserver' in window) {
+    const heroIO = new IntersectionObserver((entries) => {
+      entries.forEach((en) => {
+        heroEl.classList.toggle('hero--paused', !en.isIntersecting);
+      });
+    }, { threshold: 0 });
+    heroIO.observe(heroEl);
+  }
+
+
+  /* ========================================
      MAGNETIC BUTTONS — micro-interacción táctil
      (pointer fino · respeta reduced-motion)
      ======================================== */

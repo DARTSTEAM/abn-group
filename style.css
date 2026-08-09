@@ -312,7 +312,8 @@ body::after {
 .nav-cta:active { transform: translateY(0); }
 
 /* ============================================
-   HERO — tipografía expresiva + vida dentro del negro
+   HERO — portada minimalista (logo-forward)
+   + fondo oscuro VIVO (aurora orgánica sutil)
    ============================================ */
 .hero {
   position: relative;
@@ -325,44 +326,69 @@ body::after {
   overflow: hidden;
   background: var(--hero-bg);
 }
-/* whisper of depth — single-hue vignette, no multicolor gradient */
-.hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background: radial-gradient(120% 90% at 50% 42%, rgba(255,255,255,0.03), transparent 60%),
-              radial-gradient(120% 120% at 50% 120%, rgba(0,0,0,0.5), transparent 70%);
-  pointer-events: none;
-}
 
-/* breathing Deep Blue glow — the only life inside the Carbon Black */
+/* Ambiente vivo dentro del negro: Deep Blue dominante (base oscura)
+   + blooms MUY tenues de los colores de unidad, con deriva lenta. */
 .hero-bg {
   position: absolute;
   inset: 0;
   z-index: 0;
   overflow: hidden;
   pointer-events: none;
+  background:
+    radial-gradient(56% 48% at 50% 44%, rgba(27,24,55,0.92) 0%, rgba(27,24,55,0.34) 44%, transparent 72%),
+    radial-gradient(100% 75% at 50% 122%, rgba(10,9,20,0.85) 0%, transparent 66%);
 }
-.hero-glow {
+.hero-aurora {
   position: absolute;
-  left: 50%;
-  top: 44%;
-  width: min(1180px, 108vw);
+  width: clamp(320px, 46vw, 660px);
   aspect-ratio: 1 / 1;
-  transform: translate(-50%, -50%) scale(0.94);
-  background: radial-gradient(circle at center,
-              rgba(27, 24, 55, 0.60) 0%,
-              rgba(27, 24, 55, 0.30) 34%,
-              rgba(27, 24, 55, 0.0) 68%);
-  filter: blur(28px);
-  opacity: 0.8;
-  animation: heroBreath 13s ease-in-out infinite alternate;
+  border-radius: 50%;
+  filter: blur(80px);
+  mix-blend-mode: screen;
   will-change: transform, opacity;
 }
-@keyframes heroBreath {
-  from { transform: translate(-50%, -50%) scale(0.92); opacity: 0.72; }
-  to   { transform: translate(-50%, -50%) scale(1.09); opacity: 1; }
+.hero-aurora--blue {
+  left: 4%; top: 12%;
+  background: radial-gradient(circle at center, var(--lblue) 0%, transparent 66%);
+  opacity: 0.24;
+  animation: heroDrift1 24s ease-in-out infinite alternate;
+}
+.hero-aurora--violet {
+  right: 2%; top: 20%;
+  background: radial-gradient(circle at center, var(--violet) 0%, transparent 66%);
+  opacity: 0.20;
+  animation: heroDrift2 30s ease-in-out infinite alternate;
+}
+.hero-aurora--green {
+  left: 14%; bottom: 2%;
+  background: radial-gradient(circle at center, var(--green) 0%, transparent 66%);
+  opacity: 0.15;
+  animation: heroDrift3 27s ease-in-out infinite alternate;
+}
+.hero-aurora--orange {
+  right: 12%; bottom: 6%;
+  background: radial-gradient(circle at center, var(--orange) 0%, transparent 66%);
+  opacity: 0.11;
+  animation: heroDrift4 33s ease-in-out infinite alternate;
+}
+@keyframes heroDrift1 { from { transform: translate(-6%,-4%) scale(1);    } to { transform: translate(9%,7%)  scale(1.2);  } }
+@keyframes heroDrift2 { from { transform: translate(6%,-3%) scale(1.06);  } to { transform: translate(-8%,8%) scale(0.9);  } }
+@keyframes heroDrift3 { from { transform: translate(-4%,5%) scale(0.94);  } to { transform: translate(10%,-6%) scale(1.16);} }
+@keyframes heroDrift4 { from { transform: translate(5%,4%) scale(1.12);   } to { transform: translate(-7%,-7%) scale(0.94);} }
+/* pausar la deriva cuando el hero sale del viewport (perf) */
+.hero.hero--paused .hero-aurora { animation-play-state: paused; }
+
+/* vignette: mantiene el logo nítido y el clima sobrio/oscuro en los bordes */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    radial-gradient(66% 54% at 50% 45%, rgba(255,255,255,0.028) 0%, transparent 34%, rgba(28,28,28,0.5) 100%),
+    radial-gradient(120% 100% at 50% 122%, rgba(0,0,0,0.5), transparent 70%);
+  pointer-events: none;
 }
 
 .hero-content {
@@ -372,67 +398,22 @@ body::after {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0;
-  padding: 0 var(--gutter);
+  gap: 30px;
 }
-.hero-eyebrow {
-  opacity: 0;
-  animation: fadeInUp 1.2s var(--ease-out) 0.25s forwards;
-}
-.hero-mark {
-  width: clamp(128px, 15vw, 190px);
+.hero-logo {
+  width: clamp(210px, 30vw, 380px);
   height: auto;
-  opacity: 0.9;
+  opacity: 0;
+  animation: fadeInUp 1.4s var(--ease-out) 0.3s forwards;
 }
-
-.hero-headline {
-  margin: clamp(26px, 4vh, 46px) 0 0;
-  font-size: clamp(2.05rem, 7.6vw, 6.2rem);
-  font-weight: 200;
-  letter-spacing: -0.04em;
-  line-height: 0.98;
-}
-.hero-line {
-  display: block;
-  overflow: hidden;
-  padding-bottom: 0.06em;
-}
-.hero-line .line-inner {
-  display: block;
-  transform: translateY(115%);
-  animation: lineRise 1.15s var(--ease-out) forwards;
-}
-.hero-line:nth-child(1) .line-inner { animation-delay: 0.35s; }
-.hero-line:nth-child(2) .line-inner { animation-delay: 0.47s; }
-.hero-line:nth-child(3) .line-inner { animation-delay: 0.59s; }
-.hero-headline em {
-  font-style: normal;
-  font-weight: 700;
-  color: var(--ash);
-}
-@keyframes lineRise {
-  from { transform: translateY(115%); }
-  to   { transform: translateY(0); }
-}
-
-.hero-sub {
-  margin: clamp(24px, 3.4vh, 38px) auto 0;
-  max-width: 46ch;
-  font-size: clamp(0.98rem, 1.35vw, 1.22rem);
+.hero-tagline {
+  font-size: clamp(0.78rem, 1.1vw, 1rem);
   font-weight: 300;
-  line-height: 1.6;
-  color: var(--ash-mid);
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--ash-dim);
   opacity: 0;
-  animation: fadeInUp 1.2s var(--ease-out) 0.9s forwards;
-}
-.hero-actions {
-  margin-top: clamp(30px, 4vh, 46px);
-  display: flex;
-  flex-wrap: wrap;
-  gap: 14px;
-  justify-content: center;
-  opacity: 0;
-  animation: fadeInUp 1.2s var(--ease-out) 1.05s forwards;
+  animation: fadeInUp 1.4s var(--ease-out) 0.6s forwards;
 }
 
 .hero-bottom {
@@ -1536,9 +1517,8 @@ body::after {
     transition-duration: 0.001ms !important;
   }
   .reveal { opacity: 1; transform: none; }
-  .hero-eyebrow, .hero-sub, .hero-actions, .hero-bottom, .hero-scroll { opacity: 1; }
-  .hero-line .line-inner { transform: none; animation: none; }
-  .hero-glow { animation: none; }
+  .hero-logo, .hero-tagline, .hero-bottom, .hero-scroll { opacity: 1; }
+  .hero-aurora { animation: none; }
   .hero-scroll-line { animation: none; }
   .tl-rail-fill { transform: scaleY(1) !important; }
 }
