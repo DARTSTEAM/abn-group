@@ -25,11 +25,15 @@
   /* ---- Hero (fácil de cambiar) ---- */
   --hero-bg: var(--carbon);
 
-  /* ---- Superficies derivadas del Carbon Black ---- */
-  --bg:            #1c1c1c;
-  --bg-alt:        #202020;
-  --surface:       #282828;
-  --surface-hi:    #303030;
+  /* ---- Sistema oscuro cohesivo: Carbon Black con base fría (Deep Blue) ---- */
+  --bg:            #1a1a1f;   /* base — carbon con matiz frío */
+  --bg-alt:        #1e1d26;   /* alt — apenas elevado + más azul (Deep Blue lean) */
+  --surface:       #232230;   /* superficie de card — elevada, azulada */
+  --surface-hi:    #2b2a3a;   /* hover / superficie alta */
+
+  /* ---- Glow institucional Deep Blue (para profundidad de sección) ---- */
+  --glow-blue:      rgba(27, 24, 55, 0.55);
+  --glow-blue-soft: rgba(27, 24, 55, 0.34);
 
   /* ---- Escala de texto Ash ---- */
   --ash-mid:   rgba(249, 247, 242, 0.70);
@@ -258,7 +262,7 @@ body::after {
   border-bottom: 1px solid transparent;
 }
 .nav.scrolled {
-  background: rgba(28, 28, 28, 0.72);
+  background: rgba(20, 19, 27, 0.74);
   backdrop-filter: blur(22px);
   -webkit-backdrop-filter: blur(22px);
   padding-top: 15px;
@@ -481,7 +485,10 @@ body::after {
    VISIÓN
    ============================================ */
 .vision {
-  background: var(--bg);
+  position: relative;
+  background:
+    radial-gradient(72% 60% at 14% 4%, var(--glow-blue-soft) 0%, transparent 56%),
+    var(--bg);
   padding: var(--section-pad) 0;
 }
 .vision-grid {
@@ -549,7 +556,10 @@ body::after {
    UNIDADES
    ============================================ */
 .units {
-  background: var(--bg-alt);
+  position: relative;
+  background:
+    radial-gradient(66% 55% at 88% 6%, var(--glow-blue) 0%, transparent 55%),
+    var(--bg-alt);
   padding: var(--section-pad) 0;
 }
 .units-heading {
@@ -837,7 +847,11 @@ body::after {
    TIMELINE / TRAYECTORIA
    ============================================ */
 .timeline {
-  background: var(--bg);
+  position: relative;
+  background:
+    radial-gradient(60% 50% at 6% 22%, var(--glow-blue-soft) 0%, transparent 52%),
+    radial-gradient(50% 45% at 96% 82%, var(--glow-blue-soft) 0%, transparent 55%),
+    var(--bg);
   padding: var(--section-pad) 0;
 }
 .timeline-heading {
@@ -1024,7 +1038,10 @@ body::after {
    CLIENTES / PRUEBA SOCIAL
    ============================================ */
 .clients {
-  background: var(--bg-alt);
+  position: relative;
+  background:
+    radial-gradient(64% 55% at 90% 10%, var(--glow-blue) 0%, transparent 55%),
+    var(--bg-alt);
   padding: var(--section-pad) 0;
 }
 .client-wall {
@@ -1063,27 +1080,50 @@ body::after {
 }
 .case {
   position: relative;
+  isolation: isolate;
   display: flex;
   flex-direction: column;
-  background: linear-gradient(180deg, var(--surface) 0%, color-mix(in srgb, var(--surface) 92%, #000 8%) 100%);
-  border: 1px solid var(--ash-hair);
+  overflow: hidden;
   border-radius: 22px;
   padding: clamp(28px, 3.2vw, 42px);
-  overflow: hidden;
-  box-shadow: 0 24px 60px -40px rgba(0,0,0,0.9);
-  transition: transform 0.45s var(--ease-out), border-color 0.45s ease;
+  /* superficie con leve profundidad — sin borde 1px genérico */
+  background: linear-gradient(180deg,
+              color-mix(in srgb, var(--surface) 96%, #fff 4%) 0%,
+              color-mix(in srgb, var(--surface) 80%, #000 20%) 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(249,247,242,0.07),          /* luz de canto superior */
+    inset 0 0 0 1px rgba(249,247,242,0.035),        /* hairline apenas perceptible */
+    0 34px 74px -46px rgba(0,0,0,0.92);             /* sombra ambiental */
+  transition: transform 0.45s var(--ease-out), box-shadow 0.45s var(--ease-out);
 }
-/* unit accent bar along the top edge, contained by the card */
+/* aura de unidad: bloom suave desde la esquina superior izquierda */
 .case::before {
   content: '';
   position: absolute;
-  left: 0; top: 0; right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--unit), color-mix(in srgb, var(--unit) 30%, transparent));
+  z-index: -1;
+  top: -34%; left: -16%;
+  width: 60%; height: 86%;
+  background: radial-gradient(circle at center, color-mix(in srgb, var(--unit) 42%, transparent) 0%, transparent 62%);
+  opacity: 0.55;
+  filter: blur(16px);
+  pointer-events: none;
+}
+/* marca de unidad breve e intencional (no una franja de template) */
+.case::after {
+  content: '';
+  position: absolute;
+  top: 0; left: clamp(28px, 3.2vw, 42px);
+  width: 46px; height: 3px;
+  border-radius: 0 0 3px 3px;
+  background: var(--unit);
+  box-shadow: 0 0 18px color-mix(in srgb, var(--unit) 55%, transparent);
 }
 .case:hover {
   transform: translateY(-4px);
-  border-color: color-mix(in srgb, var(--unit) 40%, transparent);
+  box-shadow:
+    inset 0 1px 0 rgba(249,247,242,0.10),
+    inset 0 0 0 1px color-mix(in srgb, var(--unit) 26%, rgba(249,247,242,0.05)),
+    0 46px 94px -46px rgba(0,0,0,0.95);
 }
 .case-head {
   display: flex;
@@ -1181,7 +1221,10 @@ body::after {
    EQUIPO / LIDERAZGO
    ============================================ */
 .team {
-  background: var(--bg);
+  position: relative;
+  background:
+    radial-gradient(60% 55% at 10% 8%, var(--glow-blue-soft) 0%, transparent 54%),
+    var(--bg);
   padding: var(--section-pad) 0;
 }
 .team-grid {
@@ -1226,41 +1269,69 @@ body::after {
   color: var(--ash);
 }
 
-.team-roles { display: flex; flex-direction: column; gap: 10px; }
+/* Un solo panel premium; disciplinas como lista separada por hairlines
+   (no 5 cards genéricas con borde 1px) */
+.team-roles {
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  padding: 2px clamp(18px, 2vw, 28px) 6px;
+  background:
+    linear-gradient(180deg, rgba(249,247,242,0.022) 0%, transparent 20%),
+    var(--surface);
+  box-shadow:
+    inset 0 1px 0 rgba(249,247,242,0.06),
+    inset 0 0 0 1px rgba(249,247,242,0.035),
+    0 36px 78px -50px rgba(0,0,0,0.9);
+}
 .team-roles-label {
   font-size: 0.66rem;
   font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--ash-dim);
-  margin-bottom: 8px;
+  margin: 0;
+  padding: 22px 2px 16px;
+  border-bottom: 1px solid rgba(249,247,242,0.07);
 }
 .role {
+  position: relative;
   display: flex;
   align-items: flex-start;
   gap: 18px;
-  padding: 18px 22px;
-  border-radius: 14px;
-  background: var(--surface);
-  border: 1px solid var(--ash-hair);
-  border-left: 2px solid color-mix(in srgb, var(--unit) 60%, var(--ash-hair));
-  transition: transform 0.35s var(--ease-out), border-color 0.35s ease, background 0.35s ease;
+  padding: 20px 4px 20px 20px;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid rgba(249,247,242,0.055);
+  border-radius: 10px;
+  transition: background 0.4s ease;
+}
+.role:last-child { border-bottom: 0; }
+/* acento de unidad que se dibuja en hover (transform only) */
+.role::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 16px; bottom: 16px;
+  width: 2px;
+  border-radius: 2px;
+  background: var(--unit);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.4s var(--ease-out);
 }
 .role:hover {
-  transform: translateX(6px);
-  border-color: color-mix(in srgb, var(--unit) 50%, transparent);
-  border-left-color: var(--unit);
-  background: var(--surface-hi);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--unit) 10%, transparent) 0%, transparent 74%);
 }
+.role:hover::before { transform: scaleY(1); }
 .role-idx {
   flex-shrink: 0;
-  font-size: 0.72rem;
+  font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.04em;
   color: var(--unit);
   font-variant-numeric: tabular-nums;
-  padding-top: 3px;
-  width: 22px;
+  padding-top: 2px;
+  width: 24px;
 }
 .role-info { display: flex; flex-direction: column; gap: 5px; }
 .role-top {
@@ -1289,7 +1360,11 @@ body::after {
    CONTACTO
    ============================================ */
 .contact {
-  background: var(--bg-alt);
+  position: relative;
+  background:
+    radial-gradient(70% 60% at 82% 92%, var(--glow-blue) 0%, transparent 56%),
+    radial-gradient(52% 46% at 6% 4%, var(--glow-blue-soft) 0%, transparent 55%),
+    var(--bg-alt);
   padding: var(--section-pad) 0;
   padding-bottom: calc(var(--section-pad) * 0.6);
 }
@@ -1420,7 +1495,9 @@ body::after {
    FOOTER
    ============================================ */
 .footer {
-  background: var(--carbon);
+  background:
+    radial-gradient(60% 120% at 50% 120%, var(--glow-blue-soft) 0%, transparent 60%),
+    #1b1b20;
   padding: 32px var(--gutter);
   border-top: 1px solid var(--ash-hair);
 }
