@@ -1,225 +1,27 @@
 /* ============================================
    ABN GROUP — INTERACCIONES
-   Aurora WebGL (integración) · reveal · counters
-   · navbar · form · CTA routing
+   Idioma de motion autoral (reveal por línea / direccional),
+   counters con fallback, parallax de tiles, timeline,
+   navbar, form, CTA routing, magnetic — y por último la
+   Aurora WebGL (aislada para no bloquear el resto).
    ============================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
 
+  // Marca JS activo: los estados "ocultos" del reveal se aplican SOLO con .js,
+  // así el sitio es legible aunque JS falle o esté deshabilitado.
+  document.documentElement.classList.add('js');
+
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* ========================================
-     AURORA — WEBGL FLUID GRADIENT (paleta oficial)
-     Reservada a la sección de INTEGRACIÓN.
-     Blend orgánico de Tech Green · Light Blue ·
-     Cosmos Violet · Creative Orange (nunca lineal).
-     ======================================== */
-  const canvas = document.getElementById('aurora-canvas');
-  if (canvas) {
-    const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
-
-    if (gl) {
-      // Cap DPR low — the aurora is a soft, blurry gradient, so extra pixels
-      // are pure fill-rate cost (the main source of scroll jank on desktop).
-      function resize() {
-        const dpr = Math.min(window.devicePixelRatio || 1, 1.25);
-        const w = canvas.clientWidth, h = canvas.clientHeight;
-        if (!w || !h) return;
-        canvas.width = Math.round(w * dpr);
-        canvas.height = Math.round(h * dpr);
-        gl.viewport(0, 0, canvas.width, canvas.height);
-      }
-
-      const vertSrc = `
-        attribute vec2 a_position;
-        void main() { gl_Position = vec4(a_position, 0.0, 1.0); }
-      `;
-
-      const fragSrc = `
-        precision highp float;
-        uniform float u_time;
-        uniform vec2 u_resolution;
-        uniform vec2 u_mouse;
-
-        float hash(vec2 p){ return fract(sin(dot(p, vec2(127.1,311.7))) * 43758.5453123); }
-        float noise(vec2 p){
-          vec2 i = floor(p), f = fract(p);
-          f = f*f*(3.0-2.0*f);
-          float a = hash(i), b = hash(i+vec2(1.0,0.0));
-          float c = hash(i+vec2(0.0,1.0)), d = hash(i+vec2(1.0,1.0));
-          return mix(mix(a,b,f.x), mix(c,d,f.x), f.y);
-        }
-        float fbm(vec2 p){
-          float f = 0.0, amp = 0.5, freq = 1.0;
-          for(int i=0;i<4;i++){ f += amp*noise(p*freq); freq*=2.0; amp*=0.5; }
-          return f;
-        }
-
-        void main(){
-          vec2 uv = gl_FragCoord.xy / u_resolution;
-          float aspect = u_resolution.x / u_resolution.y;
-          vec2 p = uv; p.x *= aspect;
-
-          float t = u_time * 0.07;
-
-          /* gentle fluid distortion toward cursor */
-          vec2 m = u_mouse; m.x *= aspect;
-          vec2 toMouse = p - m;
-          float md = length(toMouse);
-          float mf = smoothstep(0.9, 0.0, md);
-          p += normalize(toMouse + 0.001) * mf * 0.04;
-
-          /* domain warping (IQ style) */
-          vec2 q = vec2(
-            fbm(p*2.4 + t*0.6),
-            fbm(p*2.4 + vec2(5.2,1.3) + t*0.5)
-          );
-          vec2 r = vec2(
-            fbm(p*2.4 + q*3.4 + vec2(1.7,9.2) + t*0.35),
-            fbm(p*2.4 + q*3.4 + vec2(8.3,2.8) + t*0.4)
-          );
-          float f  = fbm(p*2.4 + r*3.0 + t*0.15);
-          float f2 = fbm(p*1.7 + vec2(f*2.0, r.x*1.5) + t*0.2);
-          float blend = f*0.65 + f2*0.35;
-
-          /* ---- paleta oficial ---- */
-          vec3 base   = vec3(0.075, 0.075, 0.082);   /* carbon deep */
-          vec3 green  = vec3(0.227, 0.741, 0.588);   /* Tech Green   */
-          vec3 lblue  = vec3(0.345, 0.506, 0.941);   /* Light Blue   */
-          vec3 violet = vec3(0.678, 0.529, 1.000);   /* Cosmos Violet*/
-          vec3 orange = vec3(0.969, 0.494, 0.169);   /* Creative Orange */
-
-          vec3 col = base;
-          col = mix(col, green,  smoothstep(0.10, 0.42, blend));
-          col = mix(col, lblue,  smoothstep(0.34, 0.60, blend));
-          col = mix(col, violet, smoothstep(0.54, 0.78, blend));
-          col = mix(col, orange, smoothstep(0.76, 0.98, blend) * 0.9);
-
-          /* brightness from warping intensity */
-          float warp = length(q) + length(r)*0.5;
-          col *= 0.80 + 0.42 * smoothstep(0.5, 1.5, warp);
-
-          /* soft vignette so text stays legible */
-          float vig = 1.0 - 0.5 * pow(length(uv - 0.5) * 1.25, 2.0);
-          col *= max(vig, 0.0);
-
-          col = pow(col, vec3(0.92));
-          gl_FragColor = vec4(col, 1.0);
-        }
-      `;
-
-      function createShader(type, src){
-        const s = gl.createShader(type);
-        gl.shaderSource(s, src);
-        gl.compileShader(s);
-        if(!gl.getShaderParameter(s, gl.COMPILE_STATUS)){
-          console.error('Shader error:', gl.getShaderInfoLog(s));
-          gl.deleteShader(s); return null;
-        }
-        return s;
-      }
-
-      const vert = createShader(gl.VERTEX_SHADER, vertSrc);
-      const frag = createShader(gl.FRAGMENT_SHADER, fragSrc);
-
-      if (vert && frag) {
-        const program = gl.createProgram();
-        gl.attachShader(program, vert);
-        gl.attachShader(program, frag);
-        gl.linkProgram(program);
-
-        if (gl.getProgramParameter(program, gl.LINK_STATUS)) {
-          gl.useProgram(program);
-
-          const verts = new Float32Array([-1,-1, 1,-1, -1,1, 1,1]);
-          const buf = gl.createBuffer();
-          gl.bindBuffer(gl.ARRAY_BUFFER, buf);
-          gl.bufferData(gl.ARRAY_BUFFER, verts, gl.STATIC_DRAW);
-          const aPos = gl.getAttribLocation(program, 'a_position');
-          gl.enableVertexAttribArray(aPos);
-          gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
-
-          const uTime  = gl.getUniformLocation(program, 'u_time');
-          const uRes   = gl.getUniformLocation(program, 'u_resolution');
-          const uMouse = gl.getUniformLocation(program, 'u_mouse');
-
-          let mTX = 0.5, mTY = 0.5, mSX = 0.5, mSY = 0.5;
-          const section = document.querySelector('.integration');
-
-          if (section && window.matchMedia('(pointer: fine)').matches && !prefersReduced) {
-            section.addEventListener('mousemove', (e) => {
-              const rect = section.getBoundingClientRect();
-              mTX = (e.clientX - rect.left) / rect.width;
-              mTY = 1.0 - (e.clientY - rect.top) / rect.height;
-            });
-            section.addEventListener('mouseleave', () => { mTX = 0.5; mTY = 0.5; });
-          }
-
-          resize();
-          window.addEventListener('resize', resize, { passive: true });
-
-          function draw(elapsed){
-            mSX += (mTX - mSX) * 0.14;
-            mSY += (mTY - mSY) * 0.14;
-            gl.uniform1f(uTime, elapsed);
-            gl.uniform2f(uRes, canvas.width, canvas.height);
-            gl.uniform2f(uMouse, mSX, mSY);
-            gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
-          }
-
-          canvas.classList.add('ready');
-          // WebGL is live → drop the blur(70px) CSS fallback out of the render tree
-          if (section) section.classList.add('aurora-live');
-
-          if (prefersReduced) {
-            // single static frame — no animation loop
-            draw(24.0);
-          } else {
-            // Animate only while the section is on screen AND the tab is visible.
-            // Throttle to ~30fps: the aurora drifts slowly, so 30fps looks identical
-            // to 60 while halving GPU load — keeps scroll at a smooth 60fps.
-            const start = performance.now();
-            const FRAME = 1000 / 30;
-            let running = false, rafId = null, lastDraw = 0;
-            const loop = (now) => {
-              rafId = requestAnimationFrame(loop);
-              if (now - lastDraw < FRAME) return;
-              lastDraw = now;
-              draw((now - start) / 1000);
-            };
-            const startLoop = () => {
-              if (running || document.hidden) return;
-              running = true; lastDraw = 0;
-              rafId = requestAnimationFrame(loop);
-            };
-            const stopLoop = () => {
-              running = false;
-              if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
-            };
-            let onScreen = false;
-            const io = new IntersectionObserver((entries) => {
-              entries.forEach((en) => {
-                onScreen = en.isIntersecting;
-                if (onScreen) startLoop(); else stopLoop();
-              });
-            }, { threshold: 0.01 });
-            if (section) io.observe(section); else startLoop();
-            document.addEventListener('visibilitychange', () => {
-              if (document.hidden) stopLoop();
-              else if (onScreen) startLoop();
-            });
-          }
-        }
-      }
-    }
-  }
-
 
   /* ========================================
-     REVEAL ON SCROLL
+     REVEAL ON SCROLL — idioma de motion autoral
+     .reveal (soporte) · .reveal-lines (por línea, clip)
+     · .reveal-side (direccional) · .reveal-tl (timeline)
      ======================================== */
-  const reveals = document.querySelectorAll('.reveal');
-  if (prefersReduced) {
+  const reveals = document.querySelectorAll('.reveal, .reveal-lines, .reveal-side, .reveal-tl');
+  if (prefersReduced || !('IntersectionObserver' in window)) {
     reveals.forEach(el => el.classList.add('visible'));
   } else {
     const revealObserver = new IntersectionObserver((entries) => {
@@ -229,13 +31,13 @@ document.addEventListener('DOMContentLoaded', () => {
           revealObserver.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    }, { threshold: 0.14, rootMargin: '0px 0px -40px 0px' });
     reveals.forEach(el => revealObserver.observe(el));
   }
 
 
   /* ========================================
-     COUNTERS (cifras / métricas)
+     COUNTERS (cifras / métricas) — con fallback robusto
      ======================================== */
   const counters = document.querySelectorAll('[data-target]');
   const formatCount = (el, value) => {
@@ -244,9 +46,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const suffix = el.dataset.suffix || '';
     el.textContent = prefix + value.toFixed(decimals) + suffix;
   };
+  const setFinal = (el) => {
+    if (el.dataset.done) return;
+    el.dataset.done = '1';
+    formatCount(el, parseFloat(el.dataset.target));
+  };
   const runCounter = (el) => {
+    if (el.dataset.done) return;
     const target = parseFloat(el.dataset.target);
-    if (prefersReduced) { formatCount(el, target); return; }
+    if (prefersReduced) { setFinal(el); return; }
+    el.dataset.started = '1';
     const duration = 1500;
     const startT = performance.now();
     const step = (now) => {
@@ -254,20 +63,60 @@ document.addEventListener('DOMContentLoaded', () => {
       const eased = 1 - Math.pow(1 - p, 3); // easeOutCubic
       formatCount(el, target * eased);
       if (p < 1) requestAnimationFrame(step);
-      else formatCount(el, target);
+      else setFinal(el);
     };
     requestAnimationFrame(step);
   };
   if (counters.length) {
-    const countObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          runCounter(entry.target);
-          countObserver.unobserve(entry.target);
-        }
+    if (prefersReduced || !('IntersectionObserver' in window)) {
+      // Sin animación posible → mostramos el valor final directamente.
+      counters.forEach(setFinal);
+    } else {
+      const countObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            runCounter(entry.target);
+            countObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.6 });
+      counters.forEach(el => countObserver.observe(el));
+      // Fallback: si el observer no disparó (layout raro, ya visible sin cruzar
+      // el umbral, etc.), fijamos el valor final para no dejar "$0M" en pantalla.
+      setTimeout(() => {
+        counters.forEach(el => {
+          if (!el.dataset.started && !el.dataset.done) {
+            const r = el.getBoundingClientRect();
+            if (r.top < window.innerHeight && r.bottom > 0) runCounter(el);
+          }
+        });
+      }, 2600);
+    }
+  }
+
+
+  /* ========================================
+     PARALLAX SUTIL DE TILES (gradiente de unidades)
+     transform-only, escribe --py en un rAF batcheado
+     ======================================== */
+  const parallaxEls = Array.from(document.querySelectorAll('[data-parallax]'));
+  if (parallaxEls.length && !prefersReduced) {
+    let pTicking = false;
+    const updateParallax = () => {
+      pTicking = false;
+      const h = window.innerHeight;
+      parallaxEls.forEach(el => {
+        const r = el.getBoundingClientRect();
+        if (r.bottom < -240 || r.top > h + 240) return; // fuera de pantalla
+        const factor = parseFloat(el.dataset.parallax) || 0.06;
+        const off = ((r.top + r.height / 2) - h / 2) * factor;
+        el.style.setProperty('--py', off.toFixed(1) + 'px');
       });
-    }, { threshold: 0.6 });
-    counters.forEach(el => countObserver.observe(el));
+    };
+    const onPScroll = () => { if (!pTicking) { pTicking = true; requestAnimationFrame(updateParallax); } };
+    window.addEventListener('scroll', onPScroll, { passive: true });
+    window.addEventListener('resize', onPScroll, { passive: true });
+    updateParallax();
   }
 
 
@@ -379,7 +228,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ========================================
      TIMELINE — línea que se dibuja al scroll
-     + activación de nodos (solo transform/opacity)
+     + ignición de nodos en color de unidad (transform/opacity)
      ======================================== */
   const tlTrack = document.querySelector('.tl-track');
   const tlFill = document.querySelector('.tl-rail-fill');
@@ -402,7 +251,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // activate nodes whose dot has passed the reference line
         tlItems.forEach(item => {
           const node = item.querySelector('.tl-node');
-          const ny = (node || item).getBoundingClientRect().top + 28;
+          const ny = (node || item).getBoundingClientRect().top + 20;
           item.classList.toggle('in-view', ny <= refLine);
         });
       };
@@ -446,6 +295,218 @@ document.addEventListener('DOMContentLoaded', () => {
       });
       btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
     });
+  }
+
+
+  /* ========================================
+     AURORA — WEBGL FLUID GRADIENT (paleta oficial)
+     Reservada a la sección de INTEGRACIÓN. Va al final y
+     aislada en try/catch para no interrumpir nada anterior.
+     Blend orgánico de Tech Green · Light Blue ·
+     Cosmos Violet · Creative Orange (nunca lineal).
+     ======================================== */
+  try {
+    const canvas = document.getElementById('aurora-canvas');
+    if (canvas) {
+      const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+
+      if (gl) {
+        // Cap DPR low — the aurora is a soft, blurry gradient, so extra pixels
+        // are pure fill-rate cost (the main source of scroll jank on desktop).
+        const resize = () => {
+          const dpr = Math.min(window.devicePixelRatio || 1, 1.25);
+          const w = canvas.clientWidth, h = canvas.clientHeight;
+          if (!w || !h) return;
+          canvas.width = Math.round(w * dpr);
+          canvas.height = Math.round(h * dpr);
+          gl.viewport(0, 0, canvas.width, canvas.height);
+        };
+
+        const vertSrc = `
+          attribute vec2 a_position;
+          void main() { gl_Position = vec4(a_position, 0.0, 1.0); }
+        `;
+
+        const fragSrc = `
+          precision highp float;
+          uniform float u_time;
+          uniform vec2 u_resolution;
+          uniform vec2 u_mouse;
+
+          float hash(vec2 p){ return fract(sin(dot(p, vec2(127.1,311.7))) * 43758.5453123); }
+          float noise(vec2 p){
+            vec2 i = floor(p), f = fract(p);
+            f = f*f*(3.0-2.0*f);
+            float a = hash(i), b = hash(i+vec2(1.0,0.0));
+            float c = hash(i+vec2(0.0,1.0)), d = hash(i+vec2(1.0,1.0));
+            return mix(mix(a,b,f.x), mix(c,d,f.x), f.y);
+          }
+          float fbm(vec2 p){
+            float f = 0.0, amp = 0.5, freq = 1.0;
+            for(int i=0;i<4;i++){ f += amp*noise(p*freq); freq*=2.0; amp*=0.5; }
+            return f;
+          }
+
+          void main(){
+            vec2 uv = gl_FragCoord.xy / u_resolution;
+            float aspect = u_resolution.x / u_resolution.y;
+            vec2 p = uv; p.x *= aspect;
+
+            float t = u_time * 0.07;
+
+            /* gentle fluid distortion toward cursor */
+            vec2 m = u_mouse; m.x *= aspect;
+            vec2 toMouse = p - m;
+            float md = length(toMouse);
+            float mf = smoothstep(0.9, 0.0, md);
+            p += normalize(toMouse + 0.001) * mf * 0.04;
+
+            /* domain warping (IQ style) */
+            vec2 q = vec2(
+              fbm(p*2.4 + t*0.6),
+              fbm(p*2.4 + vec2(5.2,1.3) + t*0.5)
+            );
+            vec2 r = vec2(
+              fbm(p*2.4 + q*3.4 + vec2(1.7,9.2) + t*0.35),
+              fbm(p*2.4 + q*3.4 + vec2(8.3,2.8) + t*0.4)
+            );
+            float f  = fbm(p*2.4 + r*3.0 + t*0.15);
+            float f2 = fbm(p*1.7 + vec2(f*2.0, r.x*1.5) + t*0.2);
+            float blend = f*0.65 + f2*0.35;
+
+            /* ---- paleta oficial ---- */
+            vec3 base   = vec3(0.075, 0.075, 0.082);   /* carbon deep */
+            vec3 green  = vec3(0.227, 0.741, 0.588);   /* Tech Green   */
+            vec3 lblue  = vec3(0.345, 0.506, 0.941);   /* Light Blue   */
+            vec3 violet = vec3(0.678, 0.529, 1.000);   /* Cosmos Violet*/
+            vec3 orange = vec3(0.969, 0.494, 0.169);   /* Creative Orange */
+
+            vec3 col = base;
+            col = mix(col, green,  smoothstep(0.10, 0.42, blend));
+            col = mix(col, lblue,  smoothstep(0.34, 0.60, blend));
+            col = mix(col, violet, smoothstep(0.54, 0.78, blend));
+            col = mix(col, orange, smoothstep(0.76, 0.98, blend) * 0.9);
+
+            /* brightness from warping intensity */
+            float warp = length(q) + length(r)*0.5;
+            col *= 0.80 + 0.42 * smoothstep(0.5, 1.5, warp);
+
+            /* soft vignette so text stays legible */
+            float vig = 1.0 - 0.5 * pow(length(uv - 0.5) * 1.25, 2.0);
+            col *= max(vig, 0.0);
+
+            col = pow(col, vec3(0.92));
+            gl_FragColor = vec4(col, 1.0);
+          }
+        `;
+
+        const createShader = (type, src) => {
+          const s = gl.createShader(type);
+          gl.shaderSource(s, src);
+          gl.compileShader(s);
+          if(!gl.getShaderParameter(s, gl.COMPILE_STATUS)){
+            console.error('Shader error:', gl.getShaderInfoLog(s));
+            gl.deleteShader(s); return null;
+          }
+          return s;
+        };
+
+        const vert = createShader(gl.VERTEX_SHADER, vertSrc);
+        const frag = createShader(gl.FRAGMENT_SHADER, fragSrc);
+
+        if (vert && frag) {
+          const program = gl.createProgram();
+          gl.attachShader(program, vert);
+          gl.attachShader(program, frag);
+          gl.linkProgram(program);
+
+          if (gl.getProgramParameter(program, gl.LINK_STATUS)) {
+            gl.useProgram(program);
+
+            const verts = new Float32Array([-1,-1, 1,-1, -1,1, 1,1]);
+            const buf = gl.createBuffer();
+            gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+            gl.bufferData(gl.ARRAY_BUFFER, verts, gl.STATIC_DRAW);
+            const aPos = gl.getAttribLocation(program, 'a_position');
+            gl.enableVertexAttribArray(aPos);
+            gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
+
+            const uTime  = gl.getUniformLocation(program, 'u_time');
+            const uRes   = gl.getUniformLocation(program, 'u_resolution');
+            const uMouse = gl.getUniformLocation(program, 'u_mouse');
+
+            let mTX = 0.5, mTY = 0.5, mSX = 0.5, mSY = 0.5;
+            const section = document.querySelector('.integration');
+
+            if (section && window.matchMedia('(pointer: fine)').matches && !prefersReduced) {
+              section.addEventListener('mousemove', (e) => {
+                const rect = section.getBoundingClientRect();
+                mTX = (e.clientX - rect.left) / rect.width;
+                mTY = 1.0 - (e.clientY - rect.top) / rect.height;
+              });
+              section.addEventListener('mouseleave', () => { mTX = 0.5; mTY = 0.5; });
+            }
+
+            resize();
+            window.addEventListener('resize', resize, { passive: true });
+
+            const draw = (elapsed) => {
+              mSX += (mTX - mSX) * 0.14;
+              mSY += (mTY - mSY) * 0.14;
+              gl.uniform1f(uTime, elapsed);
+              gl.uniform2f(uRes, canvas.width, canvas.height);
+              gl.uniform2f(uMouse, mSX, mSY);
+              gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+            };
+
+            canvas.classList.add('ready');
+            // WebGL is live → drop the blur(70px) CSS fallback out of the render tree
+            if (section) section.classList.add('aurora-live');
+
+            if (prefersReduced) {
+              // single static frame — no animation loop
+              draw(24.0);
+            } else {
+              // Animate only while the section is on screen AND the tab is visible.
+              // Throttle to ~30fps: the aurora drifts slowly, so 30fps looks identical
+              // to 60 while halving GPU load — keeps scroll at a smooth 60fps.
+              const start = performance.now();
+              const FRAME = 1000 / 30;
+              let running = false, rafId = null, lastDraw = 0;
+              const loop = (now) => {
+                rafId = requestAnimationFrame(loop);
+                if (now - lastDraw < FRAME) return;
+                lastDraw = now;
+                draw((now - start) / 1000);
+              };
+              const startLoop = () => {
+                if (running || document.hidden) return;
+                running = true; lastDraw = 0;
+                rafId = requestAnimationFrame(loop);
+              };
+              const stopLoop = () => {
+                running = false;
+                if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+              };
+              let onScreen = false;
+              const io = new IntersectionObserver((entries) => {
+                entries.forEach((en) => {
+                  onScreen = en.isIntersecting;
+                  if (onScreen) startLoop(); else stopLoop();
+                });
+              }, { threshold: 0.01 });
+              if (section) io.observe(section); else startLoop();
+              document.addEventListener('visibilitychange', () => {
+                if (document.hidden) stopLoop();
+                else if (onScreen) startLoop();
+              });
+            }
+          }
+        }
+      }
+    }
+  } catch (err) {
+    console.warn('Aurora WebGL no disponible:', err);
   }
 
 });
