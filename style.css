@@ -677,18 +677,18 @@ body::after {
 .unit-actions { display: flex; align-items: center; gap: 22px; }
 .unit-cta {
   position: relative;
-  color: var(--carbon);
-  border: 1px solid color-mix(in srgb, var(--unit) 78%, #000 22%);
+  color: var(--ash);
+  border: 1px solid color-mix(in srgb, var(--unit) 58%, transparent);
   font-size: 0.8rem;
   font-weight: 700;
   letter-spacing: 0.04em;
   padding: 12px 26px 12px 24px;
   border-radius: 100px;
   background: linear-gradient(180deg,
-              color-mix(in srgb, var(--unit) 90%, #fff 10%) 0%,
-              color-mix(in srgb, var(--unit) 86%, #000 14%) 100%);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.28),
-              0 8px 22px -12px color-mix(in srgb, var(--unit) 70%, transparent),
+              color-mix(in srgb, var(--unit) 34%, #17161c) 0%,
+              color-mix(in srgb, var(--unit) 22%, #17161c) 100%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.10),
+              0 8px 22px -12px color-mix(in srgb, var(--unit) 55%, transparent),
               0 2px 5px -3px rgba(0,0,0,0.5);
   transition: transform 0.35s var(--ease-out), box-shadow 0.35s var(--ease-out), filter 0.3s ease;
   transform: translateZ(0);
@@ -1069,6 +1069,16 @@ body::after {
   transition: color 0.35s ease, background 0.35s ease;
 }
 .client:hover { color: var(--ash); background: var(--surface); }
+.client img {
+  height: 34px;
+  width: auto;
+  max-width: 80%;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  opacity: 0.48;
+  transition: opacity 0.35s ease;
+}
+.client:hover img { opacity: 0.95; }
 
 /* Cases — cards con sustento (cliente → contexto → métrica) */
 .section-label--sub { margin-bottom: 28px; }
