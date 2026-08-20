@@ -196,12 +196,15 @@ document.addEventListener('DOMContentLoaded', () => {
      COUNTERS (cifras / métricas) — con fallback robusto
      ======================================== */
   const counters = document.querySelectorAll('[data-target]');
+  // el HTML trae los valores reales (sin JS se ven); con JS arrancan en 0 y animan
+
   const formatCount = (el, value) => {
     const decimals = parseInt(el.dataset.decimals || '0', 10);
     const prefix = el.dataset.prefix || '';
     const suffix = el.dataset.suffix || '';
     el.textContent = prefix + value.toFixed(decimals) + suffix;
   };
+  if (!prefersReduced) counters.forEach(el => formatCount(el, 0));
   const setFinal = (el) => {
     if (el.dataset.done) return;
     el.dataset.done = '1';
@@ -302,6 +305,8 @@ document.addEventListener('DOMContentLoaded', () => {
         behavior: prefersReduced ? 'auto' : 'smooth',
         block: 'start'
       });
+      target.setAttribute('tabindex', '-1');
+      target.focus({ preventScroll: true });
     });
   });
 
