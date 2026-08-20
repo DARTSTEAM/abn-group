@@ -16,6 +16,162 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   /* ========================================
+     LOADER + VIDEO HERO
+     El reel de marca es el hero. El loader ("despertando
+     agentes") cubre la carga; la barra sigue el buffer real
+     y se completa al poder reproducir. Fallbacks: aurora +
+     logo estático (reduced-motion, error, sin video).
+     ======================================== */
+  const loader = document.getElementById('loader');
+  const heroVideo = document.getElementById('hero-video');
+  const loaderFill = document.getElementById('loader-fill');
+  const hideLoader = () => { if (loader) loader.classList.add('is-done'); };
+
+  const saveData = navigator.connection && navigator.connection.saveData;
+  if (heroVideo && !prefersReduced && !saveData) {
+    const portrait = window.matchMedia('(orientation: portrait)').matches;
+    heroVideo.src = portrait ? heroVideo.dataset.srcPortrait : heroVideo.dataset.srcLandscape;
+
+    // visitas repetidas en la sesión (volver de una unidad): sin loader,
+    // el video simplemente aparece cuando está listo
+    if (sessionStorage.getItem('abn:seen')) hideLoader();
+
+    const start = () => {
+      document.getElementById('hero').classList.add('hero--video');
+      if (loaderFill) loaderFill.style.transform = 'scaleX(1)';
+      setTimeout(hideLoader, 450);
+      sessionStorage.setItem('abn:seen', '1');
+      // autoplay bloqueado (battery saver, etc.) → volver al fallback aurora
+      heroVideo.play().catch(() => {
+        document.getElementById('hero').classList.remove('hero--video');
+        hideLoader();
+      });
+    };
+    const onProgress = () => {
+      if (!loaderFill || !heroVideo.duration) return;
+      const buf = heroVideo.buffered.length ? heroVideo.buffered.end(heroVideo.buffered.length - 1) : 0;
+      loaderFill.style.transform = `scaleX(${Math.min(buf / heroVideo.duration, 0.95)})`;
+    };
+    heroVideo.addEventListener('progress', onProgress);
+    heroVideo.addEventListener('canplay', start, { once: true });
+    heroVideo.addEventListener('error', hideLoader, { once: true });
+    // failsafe: si a los 4s no está listo, arrancamos igual con lo que haya
+    setTimeout(() => {
+      if (loader && !loader.classList.contains('is-done')) {
+        if (heroVideo.readyState >= 2) start(); else hideLoader();
+      }
+    }, 4000);
+    heroVideo.load();
+  } else {
+    hideLoader();
+  }
+
+
+  /* ========================================
+     SCROLL RESTORE — "Ver más" a página de unidad y vuelta
+     Guardamos la posición al salir; al volver, la restauramos.
+     ======================================== */
+  const SCROLL_KEY = 'abn:index-scroll';
+  // guarda posición: botones "Ver más" y también los cards flagship de casos
+  document.querySelectorAll('.unit-more, .cases--flag .case').forEach(a => {
+    a.addEventListener('click', () => sessionStorage.setItem(SCROLL_KEY, String(window.scrollY)));
+  });
+  if (document.body.dataset.page !== 'unit') {
+    const saved = sessionStorage.getItem(SCROLL_KEY);
+    if (saved !== null) {
+      sessionStorage.removeItem(SCROLL_KEY);
+      const y = parseInt(saved, 10) || 0;
+      // instant: sin esto, html{scroll-behavior:smooth} anima un flythrough desde arriba
+      window.scrollTo({ top: y, behavior: 'instant' });
+      // re-aplicar tras cargar la fuente (el swap corre el layout), salvo que el usuario ya haya scrolleado
+      if (document.fonts && document.fonts.ready) {
+        const before = window.scrollY;
+        document.fonts.ready.then(() => {
+          if (Math.abs(window.scrollY - before) < 4) window.scrollTo({ top: y, behavior: 'instant' });
+        });
+      }
+    }
+  }
+  // vuelta por botón Back (bfcache): el browser ya restaura solo — descartamos la clave
+  window.addEventListener('pageshow', (e) => { if (e.persisted) sessionStorage.removeItem(SCROLL_KEY); });
+
+
+  /* ========================================
+     MARQUESINA — auto-scroll + drag (mouse y touch)
+     JS reemplaza la animación CSS (que queda como fallback
+     sin JS): loop infinito envolviendo módulo el ancho del
+     track, pausa en hover (solo pointer fino) y drag libre.
+     ======================================== */
+  const marquee = document.querySelector('.marquee');
+  if (marquee) {
+    const tracks = Array.from(marquee.querySelectorAll('.marquee-track'));
+    if (tracks.length === 2) {
+      marquee.classList.add('marquee--js');
+      const canHover = window.matchMedia('(hover: hover)').matches;
+      const SPEED = 60; // px/s de auto-scroll
+      let x = 0, dragging = false, hovering = false, lastPX = 0, period = 0;
+
+      const measure = () => { period = tracks[0].offsetWidth; };
+      const apply = () => {
+        if (period > 0) x = ((x % period) + period) % period;
+        const t = `translateX(${(-x).toFixed(2)}px)`;
+        tracks[0].style.transform = t;
+        tracks[1].style.transform = t;
+      };
+      measure();
+      window.addEventListener('resize', () => { measure(); apply(); }, { passive: true });
+
+      let lastT = performance.now();
+      const tick = (now) => {
+        const dt = Math.min((now - lastT) / 1000, 0.1);
+        lastT = now;
+        if (!dragging && !(canHover && hovering) && !prefersReduced) {
+          x += SPEED * dt;
+          apply();
+        }
+        requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+
+      marquee.addEventListener('pointerenter', () => { hovering = true; });
+      marquee.addEventListener('pointerleave', () => { hovering = false; });
+      marquee.addEventListener('pointerdown', (e) => {
+        dragging = true; lastPX = e.clientX;
+        marquee.classList.add('dragging');
+        marquee.setPointerCapture(e.pointerId);
+      });
+      marquee.addEventListener('pointermove', (e) => {
+        if (!dragging) return;
+        x -= (e.clientX - lastPX);
+        lastPX = e.clientX;
+        apply();
+      });
+      const endDrag = () => { dragging = false; marquee.classList.remove('dragging'); };
+      marquee.addEventListener('pointerup', endDrag);
+      marquee.addEventListener('pointercancel', endDrag);
+    }
+  }
+
+
+  /* ========================================
+     HASH EN CARGA INICIAL — salto instantáneo
+     Con html{scroll-behavior:smooth}, llegar con #ancla desde
+     otra página anima desde arriba y a veces no llega. Jump directo.
+     ======================================== */
+  if (location.hash) {
+    const target = document.querySelector(location.hash);
+    if (target) {
+      target.scrollIntoView({ behavior: 'instant' });
+      // re-asegurar tras el primer layout completo (fuentes/imágenes)
+      setTimeout(() => {
+        const r = target.getBoundingClientRect();
+        if (Math.abs(r.top) > 80) target.scrollIntoView({ behavior: 'instant' });
+      }, 250);
+    }
+  }
+
+
+  /* ========================================
      REVEAL ON SCROLL — idioma de motion autoral
      .reveal (soporte) · .reveal-lines (por línea, clip)
      · .reveal-side (direccional) · .reveal-tl (timeline)
@@ -273,6 +429,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const heroIO = new IntersectionObserver((entries) => {
       entries.forEach((en) => {
         heroEl.classList.toggle('hero--paused', !en.isIntersecting);
+        // el video también descansa fuera del viewport
+        if (heroVideo && heroEl.classList.contains('hero--video')) {
+          if (en.isIntersecting) heroVideo.play().catch(() => {});
+          else heroVideo.pause();
+        }
       });
     }, { threshold: 0 });
     heroIO.observe(heroEl);

@@ -14,6 +14,10 @@
   <meta property="og:description" content="$200M en medios. 40 países. Cuatro unidades, un solo sistema de crecimiento.">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="es_AR">
+  <meta property="og:image" content="https://abngroup.io/assets/og/og-abn-group.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
 
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="assets/ABN Icon - JP Ash W.svg">
@@ -24,10 +28,18 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300&display=swap" rel="stylesheet">
 
   <!-- Styles -->
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=20260819">
 </head>
 
 <body>
+
+  <!-- ==================== LOADER ==================== -->
+  <div class="loader" id="loader" aria-hidden="true">
+    <img src="assets/trimmed/ABN Group Logo - JP Ash W.svg" alt="" class="loader-logo">
+    <p class="loader-text">Despertando agentes</p>
+    <div class="loader-bar"><span class="loader-bar-fill" id="loader-fill"></span></div>
+  </div>
+  <noscript><style>.loader { display: none; }</style></noscript>
 
   <a href="#grupo" class="skip-link">Saltar al contenido</a>
 
@@ -39,8 +51,7 @@
     <div class="nav-links">
       <a href="#grupo" class="nav-link">Grupo</a>
       <a href="#unidades" class="nav-link">Unidades</a>
-      <a href="#clientes" class="nav-link">Clientes</a>
-      <a href="#equipo" class="nav-link">Equipo</a>
+      <a href="#casos" class="nav-link">Casos</a>
       <a href="#contacto" class="nav-cta">Hablemos</a>
     </div>
   </nav>
@@ -48,6 +59,12 @@
 
   <!-- ==================== HERO ==================== -->
   <section class="hero" id="hero">
+    <!-- reel de marca: JS elige la fuente según orientación y activa .hero--video -->
+    <video class="hero-video" id="hero-video" muted loop playsinline preload="auto"
+           data-src-landscape="assets/video/hero-16x9.mp4"
+           data-src-portrait="assets/video/hero-9x16.mp4"
+           aria-hidden="true"></video>
+
     <div class="hero-bg" aria-hidden="true">
       <span class="hero-aurora hero-aurora--blue"></span>
       <span class="hero-aurora hero-aurora--violet"></span>
@@ -64,15 +81,51 @@
       <div class="hero-scroll-line"></div>
     </a>
 
-    <!-- metadata asimétrica: cluster de unidades a la izquierda, índice a la derecha -->
-    <div class="hero-bottom">
-      <span class="hero-units" aria-label="Unidades del grupo">
-        <span class="hero-unit"><i style="--unit:var(--green)"></i>Digital</span>
-        <span class="hero-unit"><i style="--unit:var(--orange)"></i>Studio</span>
-        <span class="hero-unit"><i style="--unit:var(--lblue)"></i>Detrics</span>
-        <span class="hero-unit"><i style="--unit:var(--violet)"></i>Hike</span>
-      </span>
-      <span class="hero-index">AR — 2026</span>
+  </section>
+
+
+  <!-- ==================== MARQUESINA · CLIENTES (bajo el hero) ==================== -->
+  <section class="marquee-band" id="clientes" aria-label="Marcas que confían en ABN Group">
+    <div class="marquee">
+      <div class="marquee-track">
+        <a class="mq-logo" style="--unit:var(--green)"  aria-label="Despegar"><img src="assets/clientes/despegar.png" alt="Despegar" loading="lazy"></a>
+        <a class="mq-logo" style="--unit:var(--orange)" aria-label="Banco Galicia"><img src="assets/clientes/galicia.png" alt="Banco Galicia" loading="lazy"></a>
+        <a class="mq-logo" style="--unit:var(--lblue)"  aria-label="AstroPay"><img src="assets/clientes/astropay.png" alt="AstroPay" loading="lazy"></a>
+        <a class="mq-logo" style="--unit:var(--green)"  aria-label="Mostaza"><img src="assets/clientes/mostaza.png" alt="Mostaza" loading="lazy"></a>
+        <a class="mq-logo" style="--unit:var(--lblue)"  aria-label="Unicomer"><img src="assets/clientes/unicomer.png" alt="Unicomer" loading="lazy"></a>
+        <a class="mq-logo" style="--unit:var(--violet)" aria-label="Rappi"><img src="assets/clientes/rappi.png" alt="Rappi" loading="lazy"></a>
+        <a class="mq-logo" style="--unit:var(--green)"  aria-label="DIRECTV"><img src="assets/clientes/directv.png" alt="DIRECTV" loading="lazy"></a>
+        <a class="mq-logo" style="--unit:var(--lblue); --s:.8"  aria-label="Loymark"><img src="assets/clientes/loymark.png" alt="Loymark" loading="lazy"></a>
+        <a class="mq-logo" style="--unit:var(--orange)" aria-label="Cocos"><img src="assets/clientes/cocos.png" alt="Cocos" loading="lazy"></a>
+        <a class="mq-logo" style="--unit:var(--green); --s:.82"  aria-label="Calm"><img src="assets/clientes/calm.png" alt="Calm" loading="lazy"></a>
+        <a class="mq-logo" style="--unit:var(--lblue); --s:.8"  aria-label="Turismo City"><img src="assets/clientes/turismocity.png" alt="Turismo City" loading="lazy"></a>
+        <a class="mq-logo" style="--unit:var(--violet)" aria-label="Sodimac"><img src="assets/clientes/sodimac.png" alt="Sodimac" loading="lazy"></a>
+        <a class="mq-logo" style="--unit:var(--violet)" aria-label="Andrómaco"><img src="assets/clientes/andromaco.png" alt="Andrómaco" loading="lazy"></a>
+        <a class="mq-logo" style="--unit:var(--orange); --s:.78" aria-label="John Foos"><img src="assets/clientes/johnfoos.png" alt="John Foos" loading="lazy"></a>
+        <a class="mq-logo" style="--unit:var(--green)"  aria-label="Vidrí"><img src="assets/clientes/vidri.png" alt="Vidrí" loading="lazy"></a>
+        <a class="mq-logo" style="--unit:var(--lblue); --s:.72"  aria-label="Novex"><img src="assets/clientes/novex.png" alt="Novex" loading="lazy"></a>
+        <a class="mq-logo" style="--unit:var(--orange); --s:.75" aria-label="Hermanas de la Caridad del Verbo Encarnado (CCVI)"><img src="assets/clientes/ccvi.png" alt="Hermanas de la Caridad del Verbo Encarnado" loading="lazy"></a>
+      </div>
+      <!-- duplicado para loop continuo (aria-hidden) -->
+      <div class="marquee-track" aria-hidden="true">
+        <a class="mq-logo" style="--unit:var(--green)"><img src="assets/clientes/despegar.png" alt="" loading="lazy"></a>
+        <a class="mq-logo" style="--unit:var(--orange)"><img src="assets/clientes/galicia.png" alt="" loading="lazy"></a>
+        <a class="mq-logo" style="--unit:var(--lblue)"><img src="assets/clientes/astropay.png" alt="" loading="lazy"></a>
+        <a class="mq-logo" style="--unit:var(--green)"><img src="assets/clientes/mostaza.png" alt="" loading="lazy"></a>
+        <a class="mq-logo" style="--unit:var(--lblue)"><img src="assets/clientes/unicomer.png" alt="" loading="lazy"></a>
+        <a class="mq-logo" style="--unit:var(--violet)"><img src="assets/clientes/rappi.png" alt="" loading="lazy"></a>
+        <a class="mq-logo" style="--unit:var(--green)"><img src="assets/clientes/directv.png" alt="" loading="lazy"></a>
+        <a class="mq-logo" style="--unit:var(--lblue); --s:.8"><img src="assets/clientes/loymark.png" alt="" loading="lazy"></a>
+        <a class="mq-logo" style="--unit:var(--orange)"><img src="assets/clientes/cocos.png" alt="" loading="lazy"></a>
+        <a class="mq-logo" style="--unit:var(--green); --s:.82"><img src="assets/clientes/calm.png" alt="" loading="lazy"></a>
+        <a class="mq-logo" style="--unit:var(--lblue); --s:.8"><img src="assets/clientes/turismocity.png" alt="" loading="lazy"></a>
+        <a class="mq-logo" style="--unit:var(--violet)"><img src="assets/clientes/sodimac.png" alt="" loading="lazy"></a>
+        <a class="mq-logo" style="--unit:var(--violet)"><img src="assets/clientes/andromaco.png" alt="" loading="lazy"></a>
+        <a class="mq-logo" style="--unit:var(--orange); --s:.78"><img src="assets/clientes/johnfoos.png" alt="" loading="lazy"></a>
+        <a class="mq-logo" style="--unit:var(--green)"><img src="assets/clientes/vidri.png" alt="" loading="lazy"></a>
+        <a class="mq-logo" style="--unit:var(--lblue); --s:.72"><img src="assets/clientes/novex.png" alt="" loading="lazy"></a>
+        <a class="mq-logo" style="--unit:var(--orange); --s:.75"><img src="assets/clientes/ccvi.png" alt="" loading="lazy"></a>
+      </div>
     </div>
   </section>
 
@@ -88,21 +141,15 @@
           </div>
 
           <h2 class="vision-heading reveal-lines">
-            <span class="line"><span>Gestionamos <b class="hue" style="--accent:var(--green)">$200M</b></span></span>
-            <span class="line"><span>en medios al año, en 40 países,</span></span>
-            <span class="line"><span>como una sola operación.</span></span>
+            <span class="line"><span>ABN Group nace para responder</span></span>
+            <span class="line"><span>a los nuevos desafíos</span></span>
+            <span class="line"><span>del <b class="hue" style="--accent:var(--green)">crecimiento digital.</b></span></span>
           </h2>
         </div>
 
         <div class="vision-body">
-          <p class="vision-lead reveal reveal-d1">No optimizamos campañas sueltas: operamos un sistema de crecimiento de punta a punta —medios, datos, tecnología y creatividad— sobre una misma lógica.</p>
-          <p class="vision-text reveal reveal-d2">ABN Group nace para responder a los desafíos del crecimiento digital. Donde las herramientas, los datos y las plataformas cambian sin parar, las empresas necesitan un sistema integrado que les dé claridad, eficiencia y velocidad.</p>
-
-          <!-- ancla tipográfica: numeral gigante que ocupa el cuadrante -->
-          <div class="vision-anchor reveal reveal-d2" aria-hidden="true">
-            <span class="vision-anchor-num">×2.6</span>
-            <span class="vision-anchor-txt">en ventas y ROAS con clientes enterprise</span>
-          </div>
+          <p class="vision-lead reveal reveal-d1">En un entorno donde las herramientas, los datos y las plataformas evolucionan constantemente, las empresas necesitan algo más que soluciones aisladas.</p>
+          <p class="vision-text reveal reveal-d2">Necesitan sistemas integrados que les permitan trabajar con mayor claridad, eficiencia y velocidad.</p>
         </div>
       </div>
     </div>
@@ -110,21 +157,47 @@
 
 
   <!-- ==================== MOMENTO · PRUEBA (full-bleed) ==================== -->
-  <section class="proof" id="proof" aria-label="Cifras de trayectoria">
+  <section class="proof" id="proof" aria-label="Credenciales y partnerships del grupo">
     <div class="container">
-      <p class="proof-kicker reveal">Números que sostienen el discurso</p>
       <div class="proof-grid">
-        <div class="proof-stat reveal" style="--accent:var(--lblue)">
+        <div class="proof-stat proof-stat--hero reveal" style="--accent:var(--orange)">
+          <span class="proof-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16 8.5h-5.5a2 2 0 1 0 0 4h3a2 2 0 1 1 0 4H8"/><path d="M12 6v2.5m0 7v2.5"/></svg></span>
+          <span class="proof-num" data-target="200" data-prefix="$" data-suffix="M">$0M</span>
+          <span class="proof-label">De inversión en medios gestionada por año</span>
+        </div>
+        <div class="proof-stat reveal reveal-d1" style="--accent:var(--lblue)">
+          <span class="proof-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span>
           <span class="proof-num" data-target="40" data-prefix="+">+0</span>
           <span class="proof-label">Países con operación de datos unificada</span>
         </div>
-        <div class="proof-stat reveal reveal-d1" style="--accent:var(--green)">
+        <div class="proof-stat reveal reveal-d2" style="--accent:var(--green)">
+          <span class="proof-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M17 18h1"/><path d="M12 18h1"/><path d="M7 18h1"/></svg></span>
           <span class="proof-num" data-target="15" data-prefix="+">+0</span>
           <span class="proof-label">Industrias con medios optimizados sobre datos</span>
         </div>
-        <div class="proof-stat proof-stat--hero reveal reveal-d2" style="--accent:var(--orange)">
-          <span class="proof-num" data-target="200" data-prefix="$" data-suffix="M">$0M</span>
-          <span class="proof-label">De inversión en medios gestionada por año</span>
+      </div>
+
+      <!-- certificaciones y partnerships -->
+      <div class="creds">
+        <div class="cred reveal" style="--accent:var(--green)">
+          <span class="cred-logo"><img src="assets/partners/gptw.png" alt="Great Place to Work Certified"></span>
+          <span class="cred-name">#1 Great Place to Work 2026</span>
+          <span class="cred-desc">Reconocidos como la mejor empresa para trabajar en Argentina según el ranking de Great Place to Work 2026.</span>
+        </div>
+        <div class="cred reveal reveal-d1" style="--accent:var(--lblue)">
+          <span class="cred-logo"><img src="assets/partners/gmp.png" alt="Google Marketing Platform"></span>
+          <span class="cred-name">Google Marketing Platform Partner</span>
+          <span class="cred-desc">Trabajamos con todo el ecosistema de GMP, con las licencias y el conocimiento para maximizar la eficiencia de sus productos.</span>
+        </div>
+        <div class="cred reveal reveal-d2" style="--accent:var(--violet)">
+          <span class="cred-logo cred-logo--row"><img src="assets/partners/google-partner.png" alt="Google Partner"><img src="assets/partners/meta-partner.png" alt="Meta Business Partners"><img src="assets/partners/tiktok.png" alt="TikTok Marketing Partners"></span>
+          <span class="cred-name">Google, Meta &amp; TikTok Partners</span>
+          <span class="cred-desc">Partners de los medios principales, con una relación exclusiva que nos da acceso a betas, eventos y novedades.</span>
+        </div>
+        <div class="cred reveal reveal-d3" style="--accent:var(--orange)">
+          <span class="cred-logo"><img src="assets/partners/austral.png" alt="Universidad Austral"></span>
+          <span class="cred-name">Universidad Austral Partners</span>
+          <span class="cred-desc">Somos partners académicos de la Universidad Austral.</span>
         </div>
       </div>
     </div>
@@ -154,17 +227,12 @@
             <div class="unit-logo"><img src="assets/ABN Digital Logo - JP Ash W.svg" alt="ABN Digital"></div>
           </div>
           <div class="unit-body">
-            <span class="unit-index" aria-hidden="true">01</span>
             <span class="unit-since">Origen · 2020</span>
             <h3 class="unit-name">ABN Digital</h3>
-            <p class="unit-kicker">Medios &amp; Analytics de performance</p>
+            <p class="unit-kicker">Digital Media &amp; Martech</p>
             <p class="unit-desc">Donde empieza todo: estrategia, medios y tecnología para marcas modernas. Campañas de performance diseñadas sobre datos y orientadas a resultados de negocio.</p>
-            <div class="unit-result">
-              <span class="unit-result-num">×2.6</span>
-              <span class="unit-result-txt">en ventas y ROAS con clientes enterprise</span>
-            </div>
             <div class="unit-actions">
-              <button type="button" class="unit-cta" data-unit="ABN Digital">Hablemos</button>
+              <a href="digital.html" class="unit-cta unit-more">Ver más</a>
               <a href="https://abndigital.com.ar/" target="_blank" rel="noopener noreferrer" class="unit-link">Ver sitio<span aria-hidden="true"> →</span></a>
             </div>
           </div>
@@ -178,16 +246,11 @@
             <div class="unit-logo"><img src="assets/ABN Studio Logo - JP Ash W.svg" alt="ABN Studio"></div>
           </div>
           <div class="unit-body">
-            <span class="unit-index" aria-hidden="true">02</span>
             <h3 class="unit-name">ABN Studio</h3>
-            <p class="unit-kicker">Contenido &amp; creatividad con IA</p>
+            <p class="unit-kicker">Creative AI &amp; Film Studio</p>
             <p class="unit-desc">Creación de contenido visual potenciada por IA: motion, video, avatares UGC y piezas de próxima generación para escalar la producción.</p>
-            <div class="unit-result">
-              <span class="unit-result-num">10×</span>
-              <span class="unit-result-txt">más piezas por ciclo creativo</span>
-            </div>
             <div class="unit-actions">
-              <button type="button" class="unit-cta" data-unit="ABN Studio">Hablemos</button>
+              <a href="studio.html" class="unit-cta unit-more">Ver más</a>
               <a href="https://dartsteam.github.io/abn-studio/v2/" target="_blank" rel="noopener noreferrer" class="unit-link">Ver sitio<span aria-hidden="true"> →</span></a>
             </div>
           </div>
@@ -201,16 +264,11 @@
             <div class="unit-logo"><img src="assets/ABN Detrics JP.svg" alt="Detrics"></div>
           </div>
           <div class="unit-body">
-            <span class="unit-index" aria-hidden="true">03</span>
             <h3 class="unit-name">Detrics</h3>
-            <p class="unit-kicker">Automatización de datos · SaaS B2B</p>
+            <p class="unit-kicker">Data Automation · SaaS B2B</p>
             <p class="unit-desc">Software que centraliza y automatiza los datos de marketing para agencias en todo el mundo. Una sola fuente de verdad, en tiempo real.</p>
-            <div class="unit-result">
-              <span class="unit-result-num">+40</span>
-              <span class="unit-result-txt">países con datos unificados</span>
-            </div>
             <div class="unit-actions">
-              <button type="button" class="unit-cta" data-unit="Detrics">Hablemos</button>
+              <a href="detrics.html" class="unit-cta unit-more">Ver más</a>
               <a href="https://detrics.io/" target="_blank" rel="noopener noreferrer" class="unit-link">Ver sitio<span aria-hidden="true"> →</span></a>
             </div>
           </div>
@@ -224,21 +282,37 @@
             <div class="unit-logo"><img src="assets/ABN Hike JP.svg" alt="Hike"></div>
           </div>
           <div class="unit-body">
-            <span class="unit-index" aria-hidden="true">04</span>
             <h3 class="unit-name">Hike</h3>
-            <p class="unit-kicker">IA, Cloud &amp; Tecnología para marketing</p>
+            <p class="unit-kicker">Cloud Architecture &amp; Applied AI</p>
             <p class="unit-desc">Sistemas automatizados y tecnología propietaria sobre Google Cloud. Partner de Google Cloud que impulsa eficiencia operativa y adopción de IA a escala.</p>
-            <div class="unit-result">
-              <span class="unit-result-num">+40%</span>
-              <span class="unit-result-txt">de eficiencia operativa en medios</span>
-            </div>
             <div class="unit-actions">
-              <button type="button" class="unit-cta" data-unit="Hike">Hablemos</button>
+              <a href="hike.html" class="unit-cta unit-more">Ver más</a>
               <a href="https://www.hikethecloud.com/" target="_blank" rel="noopener noreferrer" class="unit-link">Ver sitio<span aria-hidden="true"> →</span></a>
             </div>
           </div>
         </article>
 
+      </div>
+
+      <!-- Cierre de sección: estrategia de grupo + el sistema en un círculo -->
+      <div class="units-system reveal">
+        <div class="us-copy">
+          <span class="us-kicker">Estrategia de grupo</span>
+          <p class="us-title">Dirección General</p>
+          <p class="us-remit">Define la tesis de crecimiento y orquesta a las cuatro unidades como un solo sistema.</p>
+        </div>
+        <div class="us-diagram" aria-hidden="true">
+          <div class="us-ring">
+            <span class="us-draw"></span>
+            <span class="us-core">ABN<br>Group</span>
+            <div class="us-orbit">
+              <span class="us-pos us-pos--n"><span class="us-node" style="--unit:var(--green)">Digital</span></span>
+              <span class="us-pos us-pos--e"><span class="us-node" style="--unit:var(--orange)">Studio</span></span>
+              <span class="us-pos us-pos--s"><span class="us-node" style="--unit:var(--lblue)">Detrics</span></span>
+              <span class="us-pos us-pos--w"><span class="us-node" style="--unit:var(--violet)">Hike</span></span>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- CTA interception before verticals -->
@@ -259,12 +333,13 @@
       <p class="integration-eyebrow reveal">La integración</p>
 
       <h2 class="integration-heading reveal-lines">
-        <span class="line"><span>Una sola operación,</span></span>
-        <span class="line"><span>de la adquisición a la escala.</span></span>
+        <span class="line"><span>Digital Media, Data,</span></span>
+        <span class="line"><span>IA aplicada &amp; Creativity,</span></span>
+        <span class="line"><span><b>todo en un mismo lugar.</b></span></span>
       </h2>
 
       <p class="integration-text reveal reveal-d1">
-        Medios, datos, tecnología y creatividad bajo una misma lógica. Las cuatro unidades cubren el ciclo completo —adquisición, medición, optimización y escala— para ejecutar con velocidad, aprender con profundidad y escalar con consistencia.
+        Ofrecemos soluciones estratégicas basadas en datos, inteligencia artificial y ejecución de alto nivel, ayudando a las compañías a transformar atención en resultados medibles. Las cuatro unidades cubren el ciclo completo —adquisición, medición, optimización y escala— para ejecutar con velocidad, aprender con profundidad y escalar con consistencia.
       </p>
 
       <div class="integration-flow reveal reveal-d2">
@@ -276,6 +351,173 @@
         <span class="flow-arrow" aria-hidden="true">→</span>
         <span class="flow-step" style="--unit: var(--orange);">Escala</span>
       </div>
+
+      <div class="reveal reveal-d3" style="margin-top: clamp(40px, 6vh, 64px);">
+        <a href="#diferenciales" class="btn btn--ghost" data-magnetic><span class="btn-label">Conocé nuestros diferenciales</span></a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==================== DIFERENCIALES ==================== -->
+  <section class="diffs" id="diferenciales">
+    <div class="container">
+      <div class="section-index reveal" style="--accent:var(--lblue)">
+        <span class="section-index-num">03</span>
+        <span class="section-index-label">Diferenciales</span>
+      </div>
+
+      <h2 class="diffs-heading reveal-lines">
+        <span class="line"><span>Por qué las marcas</span></span>
+        <span class="line"><span><b class="up">eligen ABN Group.</b></span></span>
+      </h2>
+
+      <div class="diffs-grid">
+        <div class="diff reveal" style="--accent:var(--green)">
+          <span class="diff-idx">01</span>
+          <h3 class="diff-name">Solución Integral</h3>
+          <p class="diff-desc">Integramos la gestión de medios digitales, data y tecnología avanzada para potenciar resultados y escalar el retorno de inversión.</p>
+        </div>
+        <div class="diff reveal reveal-d1" style="--accent:var(--lblue)">
+          <span class="diff-idx">02</span>
+          <h3 class="diff-name">Especialización y Agilidad</h3>
+          <p class="diff-desc">Especialistas por vertical (tracking, media, cloud, dashboards, automatización) con conocimiento profundo y estructura ágil.</p>
+        </div>
+        <div class="diff reveal reveal-d2" style="--accent:var(--violet)">
+          <span class="diff-idx">03</span>
+          <h3 class="diff-name">Tecnología propia</h3>
+          <p class="diff-desc">Más eficiencia, menos margen de error: decisiones en tiempo real, monitoreo y mejores resultados con la misma inversión.</p>
+        </div>
+        <div class="diff reveal" style="--accent:var(--orange)">
+          <span class="diff-idx">04</span>
+          <h3 class="diff-name">Enfoque en Resultados</h3>
+          <p class="diff-desc">Compromiso con el crecimiento y el éxito de nuestros partners a través de estrategias basadas en datos y tecnología innovadora.</p>
+        </div>
+        <div class="diff reveal reveal-d1" style="--accent:var(--green)">
+          <span class="diff-idx">05</span>
+          <h3 class="diff-name">Experiencia Global</h3>
+          <p class="diff-desc">Capacidad probada para trabajar con clientes de diversos sectores y en más de 40 países.</p>
+        </div>
+        <div class="diff reveal reveal-d2" style="--accent:var(--lblue)">
+          <span class="diff-idx">06</span>
+          <h3 class="diff-name">Confianza y Trayectoria</h3>
+          <p class="diff-desc">Un historial sólido gestionando inversiones significativas y trabajando con marcas líderes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==================== 04 · CASOS DE ÉXITO (flagship, uno por unidad) ==================== -->
+  <section class="cases-flag" id="casos">
+    <div class="container">
+      <div class="section-index reveal" style="--accent:var(--orange)">
+        <span class="section-index-num">04</span>
+        <span class="section-index-label">Casos de éxito</span>
+      </div>
+
+      <h2 class="cases-flag-heading reveal-lines">
+        <span class="line"><span>Resultados reales,</span></span>
+        <span class="line"><span><b class="up">una historia por unidad.</b></span></span>
+      </h2>
+
+      <div class="cases cases--flag">
+        <a href="digital.html#casos" class="case reveal-side" style="--unit: var(--green);">
+          <header class="case-head">
+            <div class="case-head-main">
+              <img class="case-logo" src="assets/clientes/despegar.png" alt="Despegar">
+              <span class="case-sector">Travel &amp; e-commerce · 7 mercados</span>
+            </div>
+            <span class="case-tag">ABN Digital</span>
+          </header>
+          <p class="case-context">Unificamos la compra de medios de la campaña regional de Shakira en DV360, centralizando más de 30 publishers y optimizando la frecuencia en 7 países.</p>
+          <div class="case-metrics">
+            <div class="case-metric">
+              <span class="case-metric-num" data-target="1.3" data-prefix="US$" data-suffix="M" data-decimals="1">US$0M</span>
+              <span class="case-metric-label">Ahorrados</span>
+            </div>
+            <div class="case-metric">
+              <span class="case-metric-num" data-target="44" data-prefix="+" data-suffix="M">+0M</span>
+              <span class="case-metric-label">Usuarios únicos incrementales</span>
+            </div>
+            <div class="case-metric">
+              <span class="case-metric-num" data-target="40" data-prefix="+" data-suffix="%">+0%</span>
+              <span class="case-metric-label">Eficiencia en la inversión</span>
+            </div>
+          </div>
+          <span class="case-link">Ver más de ABN Digital</span>
+        </a>
+
+        <a href="studio.html#casos" class="case reveal-side" style="--unit: var(--orange); --from: 46px;">
+          <header class="case-head">
+            <div class="case-head-main">
+              <img class="case-logo" src="assets/clientes/galicia.png" alt="Banco Galicia">
+              <span class="case-sector">Banca · Argentina</span>
+            </div>
+            <span class="case-tag">ABN Studio</span>
+          </header>
+          <p class="case-context">"Doble camiseta": una campaña mundialista inspirada en Nueve Reinas, creada con producción AI-first para entrar en la conversación del Mundial sin ser sponsor.</p>
+          <div class="case-metrics">
+            <div class="case-metric">
+              <span class="case-metric-num" data-target="80" data-prefix="−" data-suffix="%">−0%</span>
+              <span class="case-metric-label">Costos de producción</span>
+            </div>
+            <div class="case-metric">
+              <span class="case-metric-num" data-target="5" data-suffix=" días">0 días</span>
+              <span class="case-metric-label">Del concepto a la entrega final</span>
+            </div>
+          </div>
+          <span class="case-link">Ver más de ABN Studio</span>
+        </a>
+
+        <a href="detrics.html#casos" class="case reveal-side" style="--unit: var(--lblue);">
+          <header class="case-head">
+            <div class="case-head-main">
+              <img class="case-logo" src="assets/clientes/loymark.png" alt="Loymark">
+              <span class="case-sector">Agencia · Grupo Garnier · LatAm</span>
+            </div>
+            <span class="case-tag">Detrics</span>
+          </header>
+          <p class="case-context">Migramos más de 300 cuentas publicitarias a su propio BigQuery en 14 días, con reporting en tiempo real para toda la operación.</p>
+          <div class="case-metrics">
+            <div class="case-metric">
+              <span class="case-metric-num" data-target="300" data-prefix="+">+0</span>
+              <span class="case-metric-label">Cuentas migradas</span>
+            </div>
+            <div class="case-metric">
+              <span class="case-metric-num" data-target="14" data-suffix=" días">0 días</span>
+              <span class="case-metric-label">De migración total</span>
+            </div>
+            <div class="case-metric">
+              <span class="case-metric-num" data-target="25" data-prefix="−" data-suffix="%">−0%</span>
+              <span class="case-metric-label">Churn de clientes</span>
+            </div>
+          </div>
+          <span class="case-link">Ver más de Detrics</span>
+        </a>
+
+        <a href="hike.html#casos" class="case reveal-side" style="--unit: var(--violet); --from: 46px;">
+          <header class="case-head">
+            <div class="case-head-main">
+              <img class="case-logo" src="assets/clientes/galicia.png" alt="Banco Galicia">
+              <span class="case-sector">Banca · Argentina</span>
+            </div>
+            <span class="case-tag">Hike</span>
+          </header>
+          <p class="case-context">Marketing Mix Modeling con Google Meridian para medir la incrementalidad real de cada canal y corregir decisiones distorsionadas por la atribución last-click.</p>
+          <div class="case-metrics">
+            <div class="case-metric">
+              <span class="case-metric-num" data-target="28" data-prefix="+" data-suffix="%">+0%</span>
+              <span class="case-metric-label">Activaciones de productos PyME</span>
+            </div>
+            <div class="case-metric">
+              <span class="case-metric-num" data-target="2" data-suffix=" años">0 años</span>
+              <span class="case-metric-label">De datos históricos en el modelo</span>
+            </div>
+          </div>
+          <span class="case-link">Ver más de Hike</span>
+        </a>
+      </div>
     </div>
   </section>
 
@@ -284,7 +526,7 @@
   <section class="timeline" id="trayectoria">
     <div class="container">
       <div class="section-index reveal" style="--accent:var(--violet)">
-        <span class="section-index-num">03</span>
+        <span class="section-index-num">05</span>
         <span class="section-index-label">Trayectoria</span>
       </div>
 
@@ -301,7 +543,7 @@
           <div class="tl-node"></div>
           <div class="tl-card">
             <div class="tl-card-head">
-              <span class="tl-mark" aria-hidden="true">AD</span>
+              <span class="tl-mark tl-mark--logo" aria-hidden="true"><img src="assets/isotipos/digital.png" alt=""></span>
               <span class="tl-name">ABN Digital</span>
               <span class="tl-tag">Fundación</span>
             </div>
@@ -315,7 +557,7 @@
           <div class="tl-node"></div>
           <div class="tl-card">
             <div class="tl-card-head">
-              <span class="tl-mark" aria-hidden="true">MD</span>
+              <span class="tl-mark tl-mark--logo" aria-hidden="true"><img src="assets/isotipos/digital.png" alt=""></span>
               <span class="tl-name">Media, Data &amp; Analytics</span>
               <span class="tl-tag">Consolidación</span>
             </div>
@@ -329,7 +571,7 @@
           <div class="tl-node"></div>
           <div class="tl-card">
             <div class="tl-card-head">
-              <span class="tl-mark" aria-hidden="true">De</span>
+              <span class="tl-mark tl-mark--logo" aria-hidden="true"><img src="assets/isotipos/detrics.png" alt=""></span>
               <span class="tl-name">Detrics</span>
               <span class="tl-tag">Producto</span>
             </div>
@@ -343,7 +585,7 @@
           <div class="tl-node"></div>
           <div class="tl-card">
             <div class="tl-card-head">
-              <span class="tl-mark tl-mark--neutral" aria-hidden="true">IA</span>
+              <span class="tl-mark tl-mark--logo" aria-hidden="true"><img src="assets/isotipos/detrics.png" alt=""></span>
               <span class="tl-name">La operación se vuelve AI-first</span>
               <span class="tl-tag">Cultura</span>
             </div>
@@ -357,7 +599,7 @@
           <div class="tl-node"></div>
           <div class="tl-card">
             <div class="tl-card-head">
-              <span class="tl-mark" aria-hidden="true">Hi</span>
+              <span class="tl-mark tl-mark--logo" aria-hidden="true"><img src="assets/isotipos/hike.png" alt=""></span>
               <span class="tl-name">Hike</span>
               <span class="tl-tag">IA &amp; Cloud</span>
             </div>
@@ -371,7 +613,7 @@
           <div class="tl-node"></div>
           <div class="tl-card">
             <div class="tl-card-head">
-              <span class="tl-mark" aria-hidden="true">AS</span>
+              <span class="tl-mark tl-mark--logo" aria-hidden="true"><img src="assets/isotipos/studio.png" alt=""></span>
               <span class="tl-name">ABN Studio</span>
               <span class="tl-tag">Creatividad</span>
             </div>
@@ -385,7 +627,7 @@
           <div class="tl-node"></div>
           <div class="tl-card">
             <div class="tl-card-head">
-              <span class="tl-mark tl-mark--neutral" aria-hidden="true">AG</span>
+              <span class="tl-mark tl-mark--logo" aria-hidden="true"><img src="assets/isotipos/group.png" alt=""></span>
               <span class="tl-name">ABN Group</span>
               <span class="tl-tag tl-tag--now">Hoy</span>
             </div>
@@ -399,174 +641,6 @@
   </section>
 
 
-  <!-- ==================== 04 · CLIENTES ==================== -->
-  <section class="clients" id="clientes">
-    <div class="container">
-      <div class="section-index reveal" style="--accent:var(--lblue)">
-        <span class="section-index-num">04</span>
-        <span class="section-index-label">Clientes</span>
-      </div>
-    </div>
-
-    <!-- MARQUESINA: full-bleed, fade en bordes, pausa en hover, revela color de unidad casa -->
-    <div class="marquee reveal" aria-label="Marcas que confían en ABN Group">
-      <div class="marquee-track">
-        <a class="mq-logo" style="--unit:var(--green)"  aria-label="Despegar"><img src="assets/clientes/despegar.png" alt="Despegar" loading="lazy"></a>
-        <a class="mq-logo" style="--unit:var(--orange)" aria-label="Banco Galicia"><img src="assets/clientes/galicia.png" alt="Banco Galicia" loading="lazy"></a>
-        <a class="mq-logo" style="--unit:var(--lblue)"  aria-label="AstroPay"><img src="assets/clientes/astropay.png" alt="AstroPay" loading="lazy"></a>
-        <a class="mq-logo" style="--unit:var(--violet)" aria-label="Andrómaco"><img src="assets/clientes/andromaco.png" alt="Andrómaco" loading="lazy"></a>
-        <a class="mq-logo" style="--unit:var(--lblue)"  aria-label="Unicomer"><img src="assets/clientes/unicomer.png" alt="Unicomer" loading="lazy"></a>
-        <a class="mq-logo" style="--unit:var(--green)"  aria-label="DIRECTV"><img src="assets/clientes/directv.png" alt="DIRECTV" loading="lazy"></a>
-        <a class="mq-logo" style="--unit:var(--orange)" aria-label="Cocos"><img src="assets/clientes/cocos.png" alt="Cocos" loading="lazy"></a>
-        <a class="mq-logo" style="--unit:var(--violet)" aria-label="Sodimac"><img src="assets/clientes/sodimac.png" alt="Sodimac" loading="lazy"></a>
-      </div>
-      <!-- duplicado para loop continuo (aria-hidden) -->
-      <div class="marquee-track" aria-hidden="true">
-        <a class="mq-logo" style="--unit:var(--green)"><img src="assets/clientes/despegar.png" alt="" loading="lazy"></a>
-        <a class="mq-logo" style="--unit:var(--orange)"><img src="assets/clientes/galicia.png" alt="" loading="lazy"></a>
-        <a class="mq-logo" style="--unit:var(--lblue)"><img src="assets/clientes/astropay.png" alt="" loading="lazy"></a>
-        <a class="mq-logo" style="--unit:var(--violet)"><img src="assets/clientes/andromaco.png" alt="" loading="lazy"></a>
-        <a class="mq-logo" style="--unit:var(--lblue)"><img src="assets/clientes/unicomer.png" alt="" loading="lazy"></a>
-        <a class="mq-logo" style="--unit:var(--green)"><img src="assets/clientes/directv.png" alt="" loading="lazy"></a>
-        <a class="mq-logo" style="--unit:var(--orange)"><img src="assets/clientes/cocos.png" alt="" loading="lazy"></a>
-        <a class="mq-logo" style="--unit:var(--violet)"><img src="assets/clientes/sodimac.png" alt="" loading="lazy"></a>
-      </div>
-    </div>
-
-    <div class="container">
-      <!-- Casos con métricas -->
-      <div class="cases">
-        <article class="case reveal-side" style="--unit: var(--green);">
-          <header class="case-head">
-            <div class="case-head-main">
-              <span class="case-client">Despegar</span>
-              <span class="case-sector">Travel &amp; e-commerce · LatAm</span>
-            </div>
-            <span class="case-tag">Media &amp; Performance</span>
-          </header>
-          <p class="case-context">Reestructuramos la inversión en medios y la medición de punta a punta para escalar reservas sin resignar eficiencia.</p>
-          <div class="case-metrics">
-            <div class="case-metric">
-              <span class="case-metric-num" data-target="1.3" data-prefix="US$" data-suffix="M" data-decimals="1">US$0M</span>
-              <span class="case-metric-label">Ahorrados en inversión</span>
-            </div>
-            <div class="case-metric">
-              <span class="case-metric-num" data-target="44" data-prefix="+" data-suffix="M">+0M</span>
-              <span class="case-metric-label">Usuarios únicos alcanzados</span>
-            </div>
-            <div class="case-metric">
-              <span class="case-metric-num" data-target="40" data-prefix="+" data-suffix="%">+0%</span>
-              <span class="case-metric-label">Eficiencia en medios</span>
-            </div>
-          </div>
-          <footer class="case-foot">Con <strong>ABN Digital</strong> + <strong>Detrics</strong></footer>
-        </article>
-
-        <article class="case reveal-side" style="--unit: var(--lblue);">
-          <header class="case-head">
-            <div class="case-head-main">
-              <span class="case-client">Unicomer</span>
-              <span class="case-sector">Retail · 26 países</span>
-            </div>
-            <span class="case-tag">Growth &amp; Data</span>
-          </header>
-          <p class="case-context">Unificamos las fuentes de datos y optimizamos la compra de medios para bajar el costo de adquisición y multiplicar ventas.</p>
-          <div class="case-metrics">
-            <div class="case-metric">
-              <span class="case-metric-num" data-target="62" data-prefix="−" data-suffix="%">−0%</span>
-              <span class="case-metric-label">Reducción de CPA</span>
-            </div>
-            <div class="case-metric">
-              <span class="case-metric-num" data-target="2.6" data-prefix="×" data-decimals="1">×0</span>
-              <span class="case-metric-label">En ventas y ROAS</span>
-            </div>
-          </div>
-          <footer class="case-foot">Con <strong>ABN Digital</strong> + <strong>Hike</strong></footer>
-        </article>
-      </div>
-
-      <!-- Badges / partners — tratamiento plano (tick + tracking, sin pill) -->
-      <ul class="badges reveal" aria-label="Reconocimientos y partnerships">
-        <li class="badge">#1 Great Place to Work · Argentina 2026</li>
-        <li class="badge">Google Marketing Platform Partner</li>
-        <li class="badge">Partners de Google, Meta &amp; TikTok</li>
-        <li class="badge">Universidad Austral</li>
-      </ul>
-    </div>
-  </section>
-
-
-  <!-- ==================== 05 · EQUIPO ==================== -->
-  <section class="team" id="equipo">
-    <div class="container">
-      <div class="team-grid">
-        <div class="team-lead">
-          <div class="section-index reveal" style="--accent:var(--green)">
-            <span class="section-index-num">05</span>
-            <span class="section-index-label">Equipo</span>
-          </div>
-
-          <h2 class="team-heading reveal-lines">
-            <span class="line"><span>Detrás de cada resultado,</span></span>
-            <span class="line"><span>un equipo <b class="hue" style="--accent:var(--violet)">denso en talento.</b></span></span>
-          </h2>
-          <p class="team-text reveal reveal-d1">Operamos con estándares altos, autonomía real y transparencia. Formamos a los equipos de forma continua —AI School, Tech Talks, sistemas de entrenamiento— para que la tecnología y la IA estén en el core de cómo trabajamos.</p>
-
-          <!-- diagrama del sistema de 4 unidades: ocupa el cuadrante muerto -->
-          <div class="team-system reveal reveal-d2" aria-hidden="true">
-            <span class="team-system-label">Un sistema, cuatro unidades</span>
-            <div class="team-system-ring">
-              <span class="ts-core">ABN<br>Group</span>
-              <span class="ts-node ts-node--1" style="--unit:var(--green)">Digital</span>
-              <span class="ts-node ts-node--2" style="--unit:var(--orange)">Studio</span>
-              <span class="ts-node ts-node--3" style="--unit:var(--lblue)">Detrics</span>
-              <span class="ts-node ts-node--4" style="--unit:var(--violet)">Hike</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="team-roles">
-          <p class="team-roles-label reveal">Cinco disciplinas, un mismo estándar</p>
-          <div class="role reveal reveal-d1" style="--unit: var(--ash);">
-            <span class="role-idx">01</span>
-            <div class="role-info">
-              <div class="role-top"><span class="role-title">Estrategia de grupo</span><span class="role-unit">Dirección General</span></div>
-              <span class="role-remit">Define la tesis de crecimiento y orquesta a las cuatro unidades como un solo sistema.</span>
-            </div>
-          </div>
-          <div class="role reveal reveal-d2" style="--unit: var(--green);">
-            <span class="role-idx">02</span>
-            <div class="role-info">
-              <div class="role-top"><span class="role-title">Media &amp; Performance</span><span class="role-unit">ABN Digital</span></div>
-              <span class="role-remit">Planificación y compra de medios en +15 industrias, optimizada íntegramente sobre datos.</span>
-            </div>
-          </div>
-          <div class="role reveal reveal-d3" style="--unit: var(--lblue);">
-            <span class="role-idx">03</span>
-            <div class="role-info">
-              <div class="role-top"><span class="role-title">Data &amp; Analytics</span><span class="role-unit">Detrics</span></div>
-              <span class="role-remit">Infraestructura de datos y una sola fuente de verdad, medible en tiempo real.</span>
-            </div>
-          </div>
-          <div class="role reveal reveal-d4" style="--unit: var(--violet);">
-            <span class="role-idx">04</span>
-            <div class="role-info">
-              <div class="role-top"><span class="role-title">Technology &amp; AI</span><span class="role-unit">Hike</span></div>
-              <span class="role-remit">Automatización y tecnología propietaria sobre Google Cloud, con IA a escala.</span>
-            </div>
-          </div>
-          <div class="role reveal reveal-d5" style="--unit: var(--orange);">
-            <span class="role-idx">05</span>
-            <div class="role-info">
-              <div class="role-top"><span class="role-title">Creative &amp; Content</span><span class="role-unit">ABN Studio</span></div>
-              <span class="role-remit">Producción creativa potenciada por IA: motion, video y avatares UGC a escala.</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
 
   <!-- ==================== 06 · CONTACTO ==================== -->
   <section class="contact" id="contacto">
@@ -576,9 +650,9 @@
         <span class="section-index-label">Contacto</span>
       </div>
 
-      <h2 class="contact-heading reveal-lines">
-        <span class="line"><span>Tu próximo caso</span></span>
-        <span class="line"><span>con números, <b>es el tuyo.</b></span></span>
+      <h2 class="contact-heading contact-heading--sm reveal-lines">
+        <span class="line"><span>Tu equipo puede ser nuestro</span></span>
+        <span class="line"><span><b>próximo caso de éxito.</b></span></span>
       </h2>
       <p class="contact-sub reveal reveal-d1">Contanos el objetivo. Armamos el equipo indicado y el sistema para llegar.</p>
 
@@ -637,7 +711,7 @@
   <footer class="footer">
     <div class="footer-inner">
       <a href="#hero" class="footer-logo" aria-label="ABN Group — inicio">
-        <img src="assets/ABN Group Logo - JP Ash W.svg" alt="ABN Group">
+        <img src="assets/trimmed/ABN Group Logo - JP Ash W.svg" alt="ABN Group">
       </a>
       <span class="footer-copy">© 2026 ABN Group. Todos los derechos reservados.</span>
     </div>
@@ -645,7 +719,7 @@
 
 
   <!-- Scripts -->
-  <script src="script.js"></script>
+  <script src="script.js?v=20260817b"></script>
 
 </body>
 </html>
